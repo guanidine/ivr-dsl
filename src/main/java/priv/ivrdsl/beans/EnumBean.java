@@ -135,7 +135,9 @@ public class EnumBean {
         /** 导出 */
         COMMAND_EXPORT("export"),
         /** 测试 */
-        COMMAND_TEST("test");
+        COMMAND_TEST("test"),
+        /** 帮助 */
+        COMMAND_HELP("help");
 
         /** 命令对应字符串值。 */
         private final String code;

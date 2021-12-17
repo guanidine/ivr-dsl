@@ -1,9 +1,6 @@
 package priv.ivrdsl.models;
 
-import com.beust.jcommander.IParameterValidator;
-import com.beust.jcommander.Parameter;
-import com.beust.jcommander.ParameterException;
-import com.beust.jcommander.Parameters;
+import com.beust.jcommander.*;
 import priv.ivrdsl.beans.EnumBean;
 
 import java.util.ArrayList;
@@ -18,111 +15,89 @@ import java.util.List;
  * @see Parameters
  */
 public class Commands {
-    /**
-     * 命令 {@code add}：添加一个事件。
-     */
-    @Parameters(separators = "=", commandDescription = "Add new event")
+    @Parameters(separators = "=", commandDescription = "添加一个事件")
     public static class CommandAdd {
-        @Parameter(description = "Button to trigger this event", required = true,
+        @Parameter(description = "触发该事件的按键", required = true,
                 validateWith = Validation.ValidTrigger.class)
-        public
-        String button;
-        @Parameter(names = {"-event"}, description = "Name of the event", required = true)
-        public
-        String event;
-        @Parameter(names = {"-action"}, description = "Action to execute during this event", required = true,
+        public String button;
+        @Parameter(names = {"-event"}, description = "事件名称", required = true)
+        public String event;
+        @Parameter(names = {"-action"}, description = "事件触发时执行的动作", required = true,
                 validateWith = Validation.ValidAction.class)
-        public
-        String action;
-        @Parameter(names = "-additions", description = "Addition information for some of the action", variableArity = true)
-        public
-        List<String> additions = new ArrayList<>();
+        public String action;
+        @Parameter(names = "-additions", description = "部分动作所需的额外信息", variableArity = true)
+        public List<String> additions = new ArrayList<>();
+        @Parameter(names = {"-help", "-h", "?"}, description = "显示帮助", help = true, hidden = true)
+        public boolean help = false;
     }
 
-    /**
-     * 命令 {@code config}：项目配置。
-     */
-    @Parameters(separators = "=",
-            commandDescription = "Set Baidu APPID/AK/SK and SQL tables from where to get customer information")
+    @Parameters(separators = "=", commandDescription = "配置 API 和 JDBC")
     public static class CommandConfig {
-        @Parameter(names = {"-appid"}, description = "Set Baidu API app_id")
-        public
-        String appId = null;
-        @Parameter(names = {"-apikey"}, description = "Set Baidu API api_key")
-        public
-        String apiKey = null;
-        @Parameter(names = {"-secretkey"}, description = "Set Baidu API secret_key")
-        public
-        String secretKey = null;
-        @Parameter(names = {"-name", "-table"},
-                description = "Set name of the relational database table to be added/changed")
-        public
-        String table = null;
-        @Parameter(names = {"-driver"}, description = "Set jdbc driver of the relational database")
-        public
-        String driver = null;
-        @Parameter(names = {"-url"}, description = "Set url of the relational database")
-        public
-        String url = null;
-        @Parameter(names = {"-user"}, description = "Set user name to access the relational database")
-        public
-        String user = null;
-        @Parameter(names = {"-passwd", "-password"}, description = "Set password to access the relational database")
-        public
-        String passwd = null;
-        @Parameter(names = {"-help", "-h", "?"}, description = "Display help information about ApiProps", help = true)
-        boolean help = false;
-        //TODO: help
+        @Parameter(names = {"-appid"}, description = "语音合成 appid")
+        public String appId = null;
+        @Parameter(names = {"-apikey"}, description = "语音合成 apikey")
+        public String apiKey = null;
+        @Parameter(names = {"-secretkey"}, description = "语音合成 secretkey")
+        public String secretKey = null;
+        @Parameter(names = {"-name", "-table"}, description = "数据库连接 待查关系表名")
+        public String table = null;
+        @Parameter(names = {"-driver"}, description = "数据库驱动")
+        public String driver = null;
+        @Parameter(names = {"-url"}, description = "数据库 url")
+        public String url = null;
+        @Parameter(names = {"-user"}, description = "访问数据库的用户名")
+        public String user = null;
+        @Parameter(names = {"-passwd", "-password"}, description = "访问数据库的密码")
+        public String passwd = null;
+        @Parameter(names = {"-help", "-h", "?"}, description = "显示帮助", help = true, hidden = true)
+        public boolean help = false;
 
         public final String apiConfig = "src/main/resources/apikey.properties";
         public final String jdbcConfig = "src/main/resources/jdbc.xml";
     }
 
-    /**
-     * 命令 {@code export}：导出 IVR 脚本。
-     */
-    @Parameters(separators = "=", commandDescription = "Export generated java source code along with its dependencies")
+    @Parameters(separators = "=", commandDescription = "导出 IVR 项目代码及依赖")
     public static class CommandExport {
-        @Parameter(names = "-path", description = "Export file location")
-        public
-        String exportPath = "";
+        @Parameter(names = "-path", description = "项目导出路径")
+        public String exportPath = "";
+        @Parameter(names = {"-help", "-h", "?"}, description = "显示帮助", help = true, hidden = true)
+        public boolean help = false;
     }
 
-    /**
-     * 命令 {@code init}：初始化一个 IVR 脚本，并设置脚本标题。
-     */
-    @Parameters(separators = "=", commandDescription = "Init an IVR program")
+    @Parameters(separators = "=", commandDescription = "初始化一个 IVR 项目")
     public static class CommandInit {
-        @Parameter(names = {"-title"}, description = "Title of the IVR program")
-        public
-        String title = "Voice Menu";
-        @Parameter(names = {"-playback"}, description = "Welcome playback content when put through")
-        public
-        String playback = "欢迎致电";
+        @Parameter(names = {"-title"}, description = "IVR 程序的标题")
+        public String title = "Voice Menu";
+        @Parameter(names = {"-playback"}, description = "IVR 程序的欢迎语音")
+        public String playback = "欢迎致电" + title;
+        @Parameter(names = {"-help", "-h", "?"}, description = "显示帮助", help = true, hidden = true)
+        public boolean help = false;
     }
 
-    /**
-     * 命令 {@code remove}：删除一个事件。
-     */
-    @Parameters(separators = "=", commandDescription = "Remove event via trigger path")
+    @Parameters(separators = "=", commandDescription = "删除一个事件")
     public static class CommandRemove {
-        @Parameter(description = "Trigger path from root as \"0\"", required = true)
-        public
-        String path;
+        @Parameter(description = "事件逻辑路径", required = true)
+        public String path;
+        @Parameter(names = {"-help", "-h", "?"}, description = "显示帮助", help = true, hidden = true)
+        public boolean help = false;
     }
 
-    /**
-     * 命令 {@code status}：查看当前的 IVR 事件树。
-     */
-    @Parameters(commandDescription = "Show relation schema of the events")
+    @Parameters(commandDescription = "查看当前 IVR 程序的逻辑树")
     public static class CommandStatus {
+        @Parameter(names = {"-help", "-h", "?"}, description = "显示帮助", help = true, hidden = true)
+        public boolean help = false;
     }
 
-    /**
-     * 命令 {@code test}：将脚本导出到项目中进行测试。
-     */
-    @Parameters(commandDescription = "Generate java code inside the program for test")
+    @Parameters(commandDescription = "在项目内部生成测试用的 IVR 代码")
     public static class CommandTest {
+        @Parameter(names = {"-help", "-h", "?"}, description = "显示帮助", help = true, hidden = true)
+        public boolean help = false;
+    }
+
+    @Parameters(commandDescription = "显示帮助")
+    public static class CommandHelp {
+        @Parameter(names = {"-help", "-h", "?"}, description = "显示帮助", help = true, hidden = true)
+        public boolean help = false;
     }
 
     /**

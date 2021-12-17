@@ -28,4 +28,3 @@ add 5 -event=人工服务 -action=manual
 add 9 -event=重听 -action=replay
 status
 export
-test

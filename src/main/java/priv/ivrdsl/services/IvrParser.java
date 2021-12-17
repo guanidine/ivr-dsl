@@ -100,16 +100,20 @@ public class IvrParser {
      */
     private String parseLine(String line, String path) throws IOException {
         String initCommand = "init";
+        String helpCommand = "help";
         String delim = " ";
+        boolean flag = "".equals(line) ||
+                (!initCommand.equalsIgnoreCase(line.split(delim)[0])
+                        && !helpCommand.equalsIgnoreCase(line.split(delim)[0]));
         if (!hasInit) {
-            if ("".equals(line) || !initCommand.equalsIgnoreCase(line.split(delim)[0])) {
+            if (flag) {
                 throw new SyntaxErrorException("ERROR: Expect Command \"init\" first (got \"" + line + "\")");
             } else {
                 path = IVRParser.parseCommand(line.trim(), path);
                 hasInit = true;
             }
         } else {
-            if ("".equals(line) || !initCommand.equalsIgnoreCase(line.split(delim)[0])) {
+            if (flag) {
                 path = IVRParser.parseCommand(line.trim(), path);
             } else {
                 throw new SyntaxErrorException(

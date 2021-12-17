@@ -2,10 +2,10 @@ package priv.ivrdsl.services;
 
 import com.beust.jcommander.JCommander;
 import org.apache.commons.io.FileUtils;
-import priv.ivrdsl.models.IvrMap;
-import priv.ivrdsl.models.Commands;
 import priv.ivrdsl.exceptions.ParametersException;
 import priv.ivrdsl.exceptions.SyntaxErrorException;
+import priv.ivrdsl.models.Commands;
+import priv.ivrdsl.models.IvrMap;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +29,7 @@ public class CommandParser {
     Commands.CommandStatus status;
     Commands.CommandExport export;
     Commands.CommandTest test;
+    Commands.CommandHelp help;
 
     private CommandParser() {
         config = new Commands.CommandConfig();
@@ -38,6 +39,7 @@ public class CommandParser {
         status = new Commands.CommandStatus();
         export = new Commands.CommandExport();
         test = new Commands.CommandTest();
+        help = new Commands.CommandHelp();
     }
 
     /**
@@ -56,13 +58,14 @@ public class CommandParser {
         JCommander jc =
                 JCommander.newBuilder()
                         .addObject(cm)
-                        .addCommand("config", cm.config)
                         .addCommand("init", cm.init)
                         .addCommand("add", cm.add)
                         .addCommand("remove", cm.remove)
                         .addCommand("status", cm.status)
                         .addCommand("export", cm.export)
                         .addCommand("test", cm.test)
+                        .addCommand("config", cm.config)
+                        .addCommand("help", cm.help)
                         .build();
         jc.parse(args);
         Command command = Command.getByCode(jc.getParsedCommand());
@@ -71,6 +74,9 @@ public class CommandParser {
         }
         switch (command) {
             case COMMAND_CONFIG -> {
+                if (cm.config.help) {
+                    jc.usage();
+                }
                 if (cm.config.appId != null || cm.config.apiKey != null || cm.config.secretKey != null) {
                     setApi(cm.config.appId, cm.config.apiKey, cm.config.secretKey, cm.config.apiConfig);
                 }
@@ -84,25 +90,42 @@ public class CommandParser {
                 }
             }
             case COMMAND_INIT -> {
+                if (cm.init.help) {
+                    jc.usage();
+                }
                 schema.put(path, cm.init.title, "", cm.init.playback);
                 path += "$";
             }
             case COMMAND_ADD -> {
+                if (cm.add.help) {
+                    jc.usage();
+                }
                 if (path.length() < 3 && "back".equalsIgnoreCase(cm.add.action)) {
-                    throw new SyntaxErrorException("ERROR: Cannot execute \"back\" action in the main menu " +
-                            "(add -event=" + cm.add.event + " -action=back)");
+                    throw new SyntaxErrorException("ERROR: Cannot execute \"back\" action in the main menu, " +
+                            "got (add -event=" + cm.add.event + " -action=back)");
                 }
                 path = removeLastChar(path) + cm.add.button;
                 schema.put(path, cm.add.event, cm.add.action, String.join(" ", cm.add.additions));
             }
             case COMMAND_REMOVE -> {
+                if (cm.remove.help) {
+                    jc.usage();
+                }
                 schema.remove(cm.remove.path);
                 if (path.startsWith(cm.remove.path)) {
                     path = removeLastChar(cm.remove.path) + "$";
                 }
             }
-            case COMMAND_STATUS -> System.out.println(schema.toString());
+            case COMMAND_STATUS -> {
+                if (cm.status.help) {
+                    jc.usage();
+                }
+                System.out.println(schema.toString());
+            }
             case COMMAND_EXPORT -> {
+                if (cm.export.help) {
+                    jc.usage();
+                }
                 String url = (cm.export.exportPath.length() == 0 || cm.export.exportPath.endsWith("/") || cm.export.exportPath.endsWith("\\")) ?
                         cm.export.exportPath + "VoiceMenu" : cm.export.exportPath + "/VoiceMenu";
                 File dir = new File(url);
@@ -117,10 +140,16 @@ public class CommandParser {
                 gen.generateIvr();
             }
             case COMMAND_TEST -> {
+                if (cm.test.help) {
+                    jc.usage();
+                }
                 String filepath = "src/main/java/priv/ivrdsl/";
                 String packagePath = "package priv.ivrdsl";
                 Generator gen = new Generator(filepath, schema, packagePath);
                 gen.generateIvr();
+            }
+            case COMMAND_HELP -> {
+                jc.usage();
             }
         }
         return path;
