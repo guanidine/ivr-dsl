@@ -74,9 +74,8 @@ public class SpeechSynthesisUtils {
             return;
         }
         if (res1 != null) {
-            log.info(" result : " + res1);
+            log.info(" Result : {}", res1);
         }
-        // TODO: 日志？
     }
 
     /**
@@ -94,8 +93,8 @@ public class SpeechSynthesisUtils {
             Player jlPlayer = new Player(bufferedInputStream);
             jlPlayer.play();
         } catch (Exception e) {
-            System.out.println("Problem playing mp3 file " + outputPath);
-            System.out.println(e.getMessage());
+            log.error(" ERROR : Problem playing mp3 file {}", outputPath);
+            log.error(" ERROR : {}", e.getMessage());
         }
     }
 

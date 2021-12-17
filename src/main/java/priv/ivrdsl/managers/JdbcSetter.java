@@ -1,5 +1,6 @@
 package priv.ivrdsl.managers;
 
+import lombok.extern.slf4j.Slf4j;
 import priv.ivrdsl.beans.JdbcBean;
 import priv.ivrdsl.utils.JdbcXmlUtils;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
  *
  * @author Guanidine Beryllium
  */
+@Slf4j
 public class JdbcSetter {
     /**
      * 数据库配置。
@@ -32,6 +34,7 @@ public class JdbcSetter {
             } else {
                 JdbcXmlUtils.add(jdbc, jdbcConfig);
             }
+            log.info(" Success : {} {{}, {}, {}, {}}", table, driver, url, user, passwd);
             return null;
         } else {
             return missingParamsError(table, driver, url, user, passwd);

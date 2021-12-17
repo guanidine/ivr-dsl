@@ -1,5 +1,6 @@
 package priv.ivrdsl.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import priv.ivrdsl.beans.EnumBean;
 import priv.ivrdsl.models.IvrMap;
@@ -17,6 +18,7 @@ import static priv.ivrdsl.utils.StringProcessUtils.removeLastChar;
  *
  * @author Guanidine Beryllium
  */
+@Slf4j
 public class Generator {
     private int idx;
     private final String filename;
@@ -35,7 +37,7 @@ public class Generator {
     public Generator(String filepath, IvrMap schema, String packagePath) {
         String STR = "abcdefghijklmnopqrstuvwxyz0123456789";
         this.eventRandomName = "_" + RandomStringUtils.random(6, STR);
-        this.filename =  filepath + "/VoiceMenu.java";
+        this.filename = filepath + "/VoiceMenu.java";
         this.ivrBuilder = new StringBuilder();
         this.schema = schema;
 
@@ -95,7 +97,7 @@ public class Generator {
                     QueryCaseImpl queryCase = () -> {
                         // TODO: Override this method before executing!
                     };
-                
+                                
                 }
 
                 """;
@@ -138,6 +140,7 @@ public class Generator {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        log.info(" Finish : {}", filename);
     }
 
     /**

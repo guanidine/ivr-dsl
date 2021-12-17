@@ -1,5 +1,7 @@
 package priv.ivrdsl.managers;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,6 +13,7 @@ import java.util.Properties;
  *
  * @author Guanidine Beryllium
  */
+@Slf4j
 public class ApiSetter {
     /**
      * 设置 APPID/AK/SK。
@@ -34,5 +37,6 @@ public class ApiSetter {
                 props.store(new FileOutputStream(file), "baidu api");
             }
         }
+        log.info(" Success : {{}, {}, {}}", appId, apiKey, secretKey);
     }
 }

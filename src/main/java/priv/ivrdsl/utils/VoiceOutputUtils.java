@@ -1,16 +1,16 @@
 package priv.ivrdsl.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import priv.ivrdsl.beans.GlobalVariableBean;
 
-import java.io.IOException;
-
-import static priv.ivrdsl.utils.SpeechSynthesisUtils.*;
+import static priv.ivrdsl.utils.SpeechSynthesisUtils.mp3AudioPlay;
 
 /**
  * 语音合成输出。
  *
  * @author Guanidine Beryllium
  */
+@Slf4j
 public class VoiceOutputUtils {
 
     public static Thread waitingThr = new Thread();
@@ -33,10 +33,9 @@ public class VoiceOutputUtils {
      * <p>
      * 由于使用的是单例模式，每次语音播放结束后都要手动将 {@code text} 字符串重新赋为空串。
      *
-     * @throws IOException 访问音频文件失败
      * @see <a href="https://cloud.baidu.com/doc/SPEECH/index.html">百度语音技术</a>
      */
-    public void speak() throws IOException {
+    public void speak() {
         String[] words = text.split(" ");
         StringBuilder stringBuilder = new StringBuilder();
         for (String w : words) {
@@ -44,9 +43,16 @@ public class VoiceOutputUtils {
         }
         String result = stringBuilder.toString()
                 .replaceAll("\\*", "星号键")
-                .replaceAll("#", "井号键");
-        System.out.println(result);
-        mp3AudioPlay(result);
+                .replaceAll("#", "井号键")
+                .replaceAll("^[,| ]", "")
+                .replaceAll("[,| ]$", "")
+                .replaceAll(",,", ",");
+        if (result.length() == 0) {
+            log.info(" Output : <empty string>");
+        } else {
+            log.info(" Output : {}", result);
+            mp3AudioPlay(result);
+        }
         text = "";
     }
 }

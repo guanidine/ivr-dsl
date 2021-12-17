@@ -1,5 +1,6 @@
 package priv.ivrdsl.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import priv.ivrdsl.beans.JdbcBean;
 import priv.ivrdsl.exceptions.DatabasePropsExceptions;
 import priv.ivrdsl.impls.QueryCaseImpl;
@@ -14,6 +15,7 @@ import static priv.ivrdsl.utils.JdbcXmlUtils.find;
  *
  * @author Guanidine Beryllium
  */
+@Slf4j
 public class SqlQueryUtils {
     /**
      * 查询指定数据库中的表数据, 并通过接口回调返回查询结果。
@@ -25,7 +27,7 @@ public class SqlQueryUtils {
      * @see QueryCaseImpl#queryCase
      * @see ResultSetCaller#callBack
      */
-    public static void query(String table, ResultSetCaller caller,QueryCaseImpl queryCase) {
+    public static void query(String table, ResultSetCaller caller, QueryCaseImpl queryCase) {
         JdbcBean jdbc = find(table);
         if (jdbc == null) {
             throw new DatabasePropsExceptions("ERROR: Fail to find configurations for table \"" + table + "\"");
@@ -35,6 +37,7 @@ public class SqlQueryUtils {
         PreparedStatement ps = null;
         ResultSet rs = null;
         String sql = "select * from \"" + table + "\"" + queryCase.queryCase();
+        log.info(" Query : {}", sql);
 
         try {
             Class.forName(jdbc.getDriver());
