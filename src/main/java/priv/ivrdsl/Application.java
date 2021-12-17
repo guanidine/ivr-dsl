@@ -1,6 +1,6 @@
 package priv.ivrdsl;
 
-import priv.ivrdsl.services.IvrParser;
+import priv.ivrdsl.service.IvrParser;
 
 import java.io.File;
 import java.io.IOException;
