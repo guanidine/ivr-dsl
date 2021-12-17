@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<properties> 
+  <jdbc name="tbDataPlan"> 
+    <driver>org.postgresql.Driver</driver>  
+    <url>jdbc:postgresql://117.78.10.141:8000/postgres</url>  
+    <user>user86</user>  
+    <passwd>user86@bupt</passwd> 
+  </jdbc>  
+  <jdbc name="tbCell">
+    <driver>org.postgresql.Driver</driver>
+    <url>jdbc:postgresql://117.78.10.141:8000/postgres</url>
+    <user>user86</user>
+    <passwd>user86@bupt</passwd>
+  </jdbc>
+</properties>
