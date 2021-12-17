@@ -1,7 +1,5 @@
 package priv.ivrdsl.utils;
 
-import org.dom4j.DocumentException;
-import priv.ivrdsl.beans.GlobalVariableBean;
 import priv.ivrdsl.beans.JdbcBean;
 import priv.ivrdsl.exceptions.DatabasePropsExceptions;
 import priv.ivrdsl.impls.QueryCaseImpl;
@@ -24,11 +22,10 @@ public class SqlQueryUtils {
      *
      * @param table  待查表格。查询语句为表格加上了双引号，请注意表名大小写
      * @param caller - 回调的接口
-     * @throws DocumentException 读取 xml 配置文件失败
      * @see QueryCaseImpl#queryCase
      * @see ResultSetCaller#callBack
      */
-    public static void query(String table, ResultSetCaller caller) throws DocumentException {
+    public static void query(String table, ResultSetCaller caller,QueryCaseImpl queryCase) {
         JdbcBean jdbc = find(table);
         if (jdbc == null) {
             throw new DatabasePropsExceptions("ERROR: Fail to find configurations for table \"" + table + "\"");
@@ -37,7 +34,7 @@ public class SqlQueryUtils {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "select * from \"" + table + "\"" + GlobalVariableBean.userInfoCase.queryCase();
+        String sql = "select * from \"" + table + "\"" + queryCase.queryCase();
 
         try {
             Class.forName(jdbc.getDriver());

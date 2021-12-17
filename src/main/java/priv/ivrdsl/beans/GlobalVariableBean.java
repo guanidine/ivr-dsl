@@ -1,6 +1,5 @@
 package priv.ivrdsl.beans;
 
-import priv.ivrdsl.VoiceMenu;
 import priv.ivrdsl.utils.VoiceOutputUtils;
 
 import java.util.ArrayList;
@@ -29,6 +28,4 @@ public class GlobalVariableBean {
     public static Boolean hasStarted = false;
     /** IVR 程序终止记号 */
     public static Boolean hasFinished = false;
-    /** IVR 客户信息接口的实例化对象 */
-    public static VoiceMenu.UserInfoCase userInfoCase = new VoiceMenu.UserInfoCase();
 }

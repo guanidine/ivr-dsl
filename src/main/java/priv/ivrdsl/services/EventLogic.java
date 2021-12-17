@@ -4,6 +4,7 @@ import org.dom4j.DocumentException;
 import priv.ivrdsl.beans.EnumBean.Action;
 import priv.ivrdsl.beans.GlobalVariableBean;
 import priv.ivrdsl.beans.EventBean;
+import priv.ivrdsl.impls.QueryCaseImpl;
 import priv.ivrdsl.views.Style;
 
 import java.awt.event.ActionEvent;
@@ -26,7 +27,7 @@ public class EventLogic {
      * @throws InterruptedException 线程中断失败
      * @throws DocumentException    xml 配置文件读取失败
      */
-    public static void runLogic(ActionEvent event) throws IOException, InterruptedException, DocumentException {
+    public static void runLogic(ActionEvent event, QueryCaseImpl queryCase) throws IOException, InterruptedException, DocumentException {
         detectError(event);
         EventBean currentEvent = GlobalVariableBean.event2TriggerMap.get(GlobalVariableBean.curTriggerPath);
         Style.setTextToScreen(currentEvent.getAction().getCode());
@@ -39,7 +40,7 @@ public class EventLogic {
                     Style.setTextToScreen("Direct Call");
                 }
                 case ACTION_INFO -> {
-                    GlobalVariableBean.voiceOutput.addText(data2String(currentEvent.getAdditions()));
+                    GlobalVariableBean.voiceOutput.addText(data2String(currentEvent.getAdditions(), queryCase));
                     Style.setTextToScreen("Getting Information");
                 }
                 case ACTION_HANGUP -> {

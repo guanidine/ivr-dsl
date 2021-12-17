@@ -7,6 +7,7 @@ import priv.ivrdsl.utils.SqlQueryUtils;
  *
  * @author Guanidine Beryllium
  */
+@FunctionalInterface
 public interface QueryCaseImpl {
     /**
      * 查询条件

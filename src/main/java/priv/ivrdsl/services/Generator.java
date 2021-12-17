@@ -85,19 +85,17 @@ public class Generator {
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-                                EventLogic.runLogic(event);
+                                EventLogic.runLogic(event, queryCase);
                             } catch (IOException | InterruptedException | DocumentException e) {
                                 e.printStackTrace();
                             }
                         }
                     }
-                    
-                    public static class UserInfoCase implements QueryCaseImpl {
-                        @Override
-                        public String queryCase() {
-                            // TODO: Override this method before executing!
-                        }
-                    }
+                                
+                    QueryCaseImpl queryCase = () -> {
+                        // TODO: Override this method before executing!
+                    };
+                
                 }
 
                 """;

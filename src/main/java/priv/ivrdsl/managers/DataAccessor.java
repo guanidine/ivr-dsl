@@ -1,6 +1,5 @@
 package priv.ivrdsl.managers;
 
-import org.dom4j.DocumentException;
 import priv.ivrdsl.impls.QueryCaseImpl;
 import priv.ivrdsl.impls.ResultSetCaller;
 import priv.ivrdsl.utils.SqlQueryUtils;
@@ -18,12 +17,11 @@ public class DataAccessor {
      *
      * @param table 查询目标关系表
      * @return 处理后的查询结果
-     * @throws DocumentException 读取 xml 配置文件失败
      * @see QueryCaseImpl#queryCase()
      */
-    public static String data2String(String table) throws DocumentException {
+    public static String data2String(String table,QueryCaseImpl queryCase) {
         StringBuilder sb = new StringBuilder();
-        ResultSetCaller rowMapper = rs -> {
+        ResultSetCaller caller = rs -> {
             try {
                 int columnCount = rs.getMetaData().getColumnCount();
                 if (rs.next()) {
@@ -36,7 +34,7 @@ public class DataAccessor {
                 e.printStackTrace();
             }
         };
-        SqlQueryUtils.query(table, rowMapper);
+        SqlQueryUtils.query(table, caller,queryCase);
         return sb.toString();
     }
 }

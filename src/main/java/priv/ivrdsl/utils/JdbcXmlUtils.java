@@ -12,7 +12,6 @@ import priv.ivrdsl.beans.JdbcBean;
 import java.io.*;
 import java.util.List;
 
-
 /**
  * 对 jdbc 配置文件的增删改查操作。
  *

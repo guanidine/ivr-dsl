@@ -10,7 +10,6 @@ import java.util.List;
  * 事件节点。记录事件本身的名称、触发方式、触发动作、从属事件集等信息。
  *
  * @author Guanidine Beryllium
- * @see priv.ivrdsl.utils.ConstructorUtil#constructEvents
  */
 @Data
 public class EventBean {
@@ -20,10 +19,6 @@ public class EventBean {
     private Action action;
     private String additions;
     private boolean isFinal;
-
-    public EventBean() {
-        this.isFinal = false;
-    }
 
     /**
      * 构造一个标准的事件。面向中文用户，因此在构造同时可为事件设定一个中文名称。
@@ -50,15 +45,6 @@ public class EventBean {
     public void setAction(String action, boolean isFinal) {
         this.action = Action.getByCode(action);
         this.isFinal = isFinal;
-    }
-
-    /**
-     * 设置事件触发的动作。
-     *
-     * @param action 事件动作
-     */
-    public void setAction(String action) {
-        this.action = Action.getByCode(action);
     }
 
     /**

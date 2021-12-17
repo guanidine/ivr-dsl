@@ -19,11 +19,6 @@ public class SpeechSynthesisUtils {
     /** 百度语音识别的 Java 客户端 */
     private static volatile AipSpeech client;
 
-    /** 第三方接口测试 */
-    public static void main(String[] args) throws IOException {
-        mp3AudioPlay("测试百度语音合成");
-    }
-
     /**
      * 单例模式实例化。读取 API 配置时使用反射访问，因此可以在打包成 jar 包后在其他项目中正确运行。
      *
