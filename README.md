@@ -176,7 +176,7 @@ Usage: export [options] 项目导出路径
 ```
 
 如果没有指定导出路径，则会在项目文件夹下创建一个名为 `release` 的文件夹（如果文件夹不存在的话），随后在其中生成一个表达 IVR 逻辑的 Java 程序 `VoiceMenu.java`
-和运行程序需要的依赖包 `ivrdsl-1.0-SNAPSHOT-jar-with-dependencies.jar`。若指定路径，则会在路径下创建 `release` 文件夹，并在其中包含上述的两个文件。
+和运行程序需要的依赖包 `ivrdsl-1.0.0-jar-with-dependencies.jar`。若指定路径，则会在路径下创建 `release` 文件夹，并在其中包含上述的两个文件。
 
 在其他项目中导入 `jar` 包后， `VoiceMenu.java` 就可以在那个项目中运行。
 

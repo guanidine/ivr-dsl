@@ -141,8 +141,8 @@ public class CommandParser {
                             throw new IOException();
                         }
                     }
-                    FileUtils.copyFile(new File("target/ivrdsl-1.0-SNAPSHOT-jar-with-dependencies.jar"),
-                            new File(url + "/ivrdsl-1.0-SNAPSHOT-jar-with-dependencies.jar"));
+                    FileUtils.copyFile(new File("target/ivrdsl-1.0.0-jar-with-dependencies.jar"),
+                            new File(url + "/ivrdsl-1.0.0-jar-with-dependencies.jar"));
                     Generator gen = new Generator(url, schema);
                     gen.generateIvr();
                 }

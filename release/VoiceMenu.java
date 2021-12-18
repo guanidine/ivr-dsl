@@ -31,70 +31,70 @@ public class VoiceMenu implements ActionListener {
      * @see priv.ivrdsl.model.IvrMap
      */
     public static void initHashMap() {
-        EventBean Action_0_gr6190 = new EventBean("Home", "China-Mobile", "0", "欢迎致电申国移动");
-        Action_0_gr6190.setAction("", true);
+        EventBean Action_0_757cnw = new EventBean("Home", "China-Mobile", "0", "欢迎致电申国移动");
+        Action_0_757cnw.setAction("", true);
 
-        GlobalVariableBean.event2TriggerMap.put("0", Action_0_gr6190);
+        GlobalVariableBean.event2TriggerMap.put("0", Action_0_757cnw);
 
-        EventBean Action_01_gr6190 = new EventBean("Action_01", "转接服务", "1", "分号123");
-        GlobalVariableBean.event2TriggerMap.put("01", Action_01_gr6190);
-        Action_01_gr6190.setAction("call", true);
-        Action_0_gr6190.addChild(Action_01_gr6190);
+        EventBean Action_01_757cnw = new EventBean("Action_01", "转接服务", "1", "分号123");
+        GlobalVariableBean.event2TriggerMap.put("01", Action_01_757cnw);
+        Action_01_757cnw.setAction("call", true);
+        Action_0_757cnw.addChild(Action_01_757cnw);
 
-        EventBean Action_02_gr6190 = new EventBean("Action_02", "信息业务", "2", "tbDataPlan");
-        GlobalVariableBean.event2TriggerMap.put("02", Action_02_gr6190);
-        Action_02_gr6190.setAction("info", true);
-        Action_0_gr6190.addChild(Action_02_gr6190);
+        EventBean Action_02_757cnw = new EventBean("Action_02", "信息业务", "2", "tbDataPlan");
+        GlobalVariableBean.event2TriggerMap.put("02", Action_02_757cnw);
+        Action_02_757cnw.setAction("info", true);
+        Action_0_757cnw.addChild(Action_02_757cnw);
 
-        EventBean Action_04_gr6190 = new EventBean("Action_04", "录音", "4", "");
-        GlobalVariableBean.event2TriggerMap.put("04", Action_04_gr6190);
-        Action_04_gr6190.setAction("record", true);
-        Action_0_gr6190.addChild(Action_04_gr6190);
+        EventBean Action_04_757cnw = new EventBean("Action_04", "录音", "4", "");
+        GlobalVariableBean.event2TriggerMap.put("04", Action_04_757cnw);
+        Action_04_757cnw.setAction("record", true);
+        Action_0_757cnw.addChild(Action_04_757cnw);
 
-        EventBean Action_05_gr6190 = new EventBean("Action_05", "人工服务", "5", "");
-        GlobalVariableBean.event2TriggerMap.put("05", Action_05_gr6190);
-        Action_05_gr6190.setAction("manual", true);
-        Action_0_gr6190.addChild(Action_05_gr6190);
+        EventBean Action_05_757cnw = new EventBean("Action_05", "人工服务", "5", "");
+        GlobalVariableBean.event2TriggerMap.put("05", Action_05_757cnw);
+        Action_05_757cnw.setAction("manual", true);
+        Action_0_757cnw.addChild(Action_05_757cnw);
 
-        EventBean Action_09_gr6190 = new EventBean("Action_09", "重听", "9", "");
-        GlobalVariableBean.event2TriggerMap.put("09", Action_09_gr6190);
-        Action_09_gr6190.setAction("replay", false);
-        Action_0_gr6190.addChild(Action_09_gr6190);
+        EventBean Action_09_757cnw = new EventBean("Action_09", "重听", "9", "");
+        GlobalVariableBean.event2TriggerMap.put("09", Action_09_757cnw);
+        Action_09_757cnw.setAction("replay", false);
+        Action_0_757cnw.addChild(Action_09_757cnw);
 
-        EventBean Action_00_gr6190 = new EventBean("Action_00", "投诉", "0", "");
-        GlobalVariableBean.event2TriggerMap.put("00", Action_00_gr6190);
-        Action_00_gr6190.setAction("menu", false);
-        Action_0_gr6190.addChild(Action_00_gr6190);
+        EventBean Action_00_757cnw = new EventBean("Action_00", "投诉", "0", "");
+        GlobalVariableBean.event2TriggerMap.put("00", Action_00_757cnw);
+        Action_00_757cnw.setAction("menu", false);
+        Action_0_757cnw.addChild(Action_00_757cnw);
 
-        EventBean Action_009_gr6190 = new EventBean("Action_009", "返回上级菜单", "9", "");
-        GlobalVariableBean.event2TriggerMap.put("009", Action_009_gr6190);
-        Action_009_gr6190.setAction("back", false);
-        Action_00_gr6190.addChild(Action_009_gr6190);
+        EventBean Action_009_757cnw = new EventBean("Action_009", "返回上级菜单", "9", "");
+        GlobalVariableBean.event2TriggerMap.put("009", Action_009_757cnw);
+        Action_009_757cnw.setAction("back", false);
+        Action_00_757cnw.addChild(Action_009_757cnw);
 
-        EventBean Action_000_gr6190 = new EventBean("Action_000", "投诉", "0", "");
-        GlobalVariableBean.event2TriggerMap.put("000", Action_000_gr6190);
-        Action_000_gr6190.setAction("menu", false);
-        Action_00_gr6190.addChild(Action_000_gr6190);
+        EventBean Action_000_757cnw = new EventBean("Action_000", "投诉", "0", "");
+        GlobalVariableBean.event2TriggerMap.put("000", Action_000_757cnw);
+        Action_000_757cnw.setAction("menu", false);
+        Action_00_757cnw.addChild(Action_000_757cnw);
 
-        EventBean Action_0009_gr6190 = new EventBean("Action_0009", "返回上级菜单", "9", "");
-        GlobalVariableBean.event2TriggerMap.put("0009", Action_0009_gr6190);
-        Action_0009_gr6190.setAction("back", false);
-        Action_000_gr6190.addChild(Action_0009_gr6190);
+        EventBean Action_0009_757cnw = new EventBean("Action_0009", "返回上级菜单", "9", "");
+        GlobalVariableBean.event2TriggerMap.put("0009", Action_0009_757cnw);
+        Action_0009_757cnw.setAction("back", false);
+        Action_000_757cnw.addChild(Action_0009_757cnw);
 
-        EventBean Action_0000_gr6190 = new EventBean("Action_0000", "结束通话", "0", "");
-        GlobalVariableBean.event2TriggerMap.put("0000", Action_0000_gr6190);
-        Action_0000_gr6190.setAction("hangup", true);
-        Action_000_gr6190.addChild(Action_0000_gr6190);
+        EventBean Action_0000_757cnw = new EventBean("Action_0000", "结束通话", "0", "");
+        GlobalVariableBean.event2TriggerMap.put("0000", Action_0000_757cnw);
+        Action_0000_757cnw.setAction("hangup", true);
+        Action_000_757cnw.addChild(Action_0000_757cnw);
 
-        EventBean Action_00a_gr6190 = new EventBean("Action_00a", "转接服务", "*", "");
-        GlobalVariableBean.event2TriggerMap.put("00*", Action_00a_gr6190);
-        Action_00a_gr6190.setAction("call", true);
-        Action_00_gr6190.addChild(Action_00a_gr6190);
+        EventBean Action_00a_757cnw = new EventBean("Action_00a", "转接服务", "*", "");
+        GlobalVariableBean.event2TriggerMap.put("00*", Action_00a_757cnw);
+        Action_00a_757cnw.setAction("call", true);
+        Action_00_757cnw.addChild(Action_00a_757cnw);
 
-        EventBean Action_00b_gr6190 = new EventBean("Action_00b", "结束通话", "#", "");
-        GlobalVariableBean.event2TriggerMap.put("00#", Action_00b_gr6190);
-        Action_00b_gr6190.setAction("hangup", true);
-        Action_00_gr6190.addChild(Action_00b_gr6190);
+        EventBean Action_00b_757cnw = new EventBean("Action_00b", "结束通话", "#", "");
+        GlobalVariableBean.event2TriggerMap.put("00#", Action_00b_757cnw);
+        Action_00b_757cnw.setAction("hangup", true);
+        Action_00_757cnw.addChild(Action_00b_757cnw);
 
     }
 

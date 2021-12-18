@@ -6,7 +6,7 @@
 
     <groupId>priv.ivr.dsl</groupId>
     <artifactId>ivrdsl</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <build>
         <plugins>
             <plugin>
