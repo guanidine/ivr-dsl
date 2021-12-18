@@ -259,16 +259,16 @@ remove ?
 
 ### 示例程序
 
-IVR 脚本：**[test.ivr](http://10.112.112.240:8081/2019211834/ivr-dsl/-/blob/main/src/test/resources/test.ivr)**
+IVR 脚本：**[test.ivr](./src/test/resources/test.ivr)**
 
-生成程序：**[VoiceMenu.java](http://10.112.112.240:8081/2019211834/ivr-dsl/-/blob/main/src/main/java/priv/ivrdsl/VoiceMenu.java)**
+生成程序：**[VoiceMenu.java](./src/main/java/priv/ivrdsl/VoiceMenu.java)**
 
 ------
 
 ## 运行 IVR 程序
 
 IVR DSL Compiler 生成的 `VoiceMenu.java` 中为用户留下了一个接口方法 `queryCase`，它的类型为使用 `@FunctionalInterface`
-注解的接口类 [**`QueryCaseImpl`**](http://10.112.112.240:8081/2019211834/ivr-dsl/-/blob/main/src/main/java/priv/ivrdsl/impl/QueryCaseImpl.java)。该接口用于配置数据库查询的条件。
+注解的接口类 [**`QueryCaseImpl`**](./src/main/java/priv/ivrdsl/impl/QueryCaseImpl.java)。该接口用于配置数据库查询的条件。
 
 举个例子，某个 IVR 程序根据用户的手机号码查询用户流量套餐和话费账单，这两个信息可以来自两个不同的查询业务，也就是不同的两个 `info` 动作，但条件一般都是一样的，也就是：
 
@@ -309,7 +309,7 @@ IVR 的业务逻辑呈现为树状，具体表现为以初始状态“0”为树
 对于这个逻辑树，我们令根节点的绝对路径为“0”。用户通过按键到达一个事件节点，则这个事件节点相对根节点的路径就是用户按键的顺序。因此可以将每一个事件节点的绝对路径表示为 `"0" + 用户到达该节点的按键顺序`。
 
 因此在 Compiler
-中设计有一个数据结构 [**`IvrMap`**](http://10.112.112.240:8081/2019211834/ivr-dsl/-/blob/main/src/main/java/priv/ivrdsl/model/IvrMap.java)，其中的一个成员变量为 `Map<String, List<String>>`
+中设计有一个数据结构 [**`IvrMap`**](./src/main/java/priv/ivrdsl/model/IvrMap.java)，其中的一个成员变量为 `Map<String, List<String>>`
 类型的 HashMap ，用以记录每一个事件节点绝对路径和事件信息（包括事件 `event`，动作 `action` 和补充信息 `additions`）的映射关系，我们称之为 **trigger-event映射**），以此表示 IVR
 脚本的业务逻辑。
 
@@ -318,25 +318,25 @@ IVR 的业务逻辑呈现为树状，具体表现为以初始状态“0”为树
 一个事件由事件名（需符合 Java 命名规则）、语音播放中使用的事件名、触发按键、子事件集合、可能需要的补充信息、触发动作、事件结束后的处理这样一组变量就可以完全描述。
 
 其中事件名和语音播放事件名之间一一对应，可以由一个哈希表 `event2VoiceTextMap` 表达。而事件名与其他几项共同描述一个事件，我们可以将其组成一个 `JavaBean`
-，即 [**`EventBean`**](http://10.112.112.240:8081/2019211834/ivr-dsl/-/blob/main/src/main/java/priv/ivrdsl/model/EventBean.java)。
+，即 [**`EventBean`**](./src/main/java/priv/ivrdsl/model/EventBean.java)。
 
 ### 枚举
 
 动作 `action` ，按键 `button` 和命令 `command`
-都存在一个可选的范围，因此分别为它们设计了枚举类，全部存放在类 [**`EnumBean`**](http://10.112.112.240:8081/2019211834/ivr-dsl/-/blob/main/src/main/java/priv/ivrdsl/model/EnumBean.java)
+都存在一个可选的范围，因此分别为它们设计了枚举类，全部存放在类 [**`EnumBean`**](./src/main/java/priv/ivrdsl/model/EnumBean.java)
 内。并由于 `valueOf` 不可重载，另外设计了一个 `getByCode` 方法完成由字符串查找枚举值的工作。
 
 ### 语法解析
 
 语法解析使用了 `JCommander` 提供的接口，将 DSL
-设计成类似命令行命令的格式，以便调用接口完成解析。所有语句的解析工作都在 [**`Commands`**](http://10.112.112.240:8081/2019211834/ivr-dsl/-/blob/main/src/main/java/priv/ivrdsl/model/Commands.java)
+设计成类似命令行命令的格式，以便调用接口完成解析。所有语句的解析工作都在 [**`Commands`**](./src/main/java/priv/ivrdsl/model/Commands.java)
 类中完成。
 
 ### 其他数据结构
 
 一个事件下属子事件的按键集合 `List<String> possibleOptionList` ，事件对象名与按键路径的映射表 `HashMap<String, EventBean> event2TriggerMap`
 ，事件对象名与语音输出名称的映射表 `HashMap<String, String> event2VoiceTextMap` ，这些变量贯穿于整个 IVR 运行过程，且考虑到每一个 IVR 进程只需要一个，所以设置成 `static`
-的全局静态变量，提供给整个程序使用，它们存放在 [**`GlobalVariableBean`**](http://10.112.112.240:8081/2019211834/ivr-dsl/-/blob/main/src/main/java/priv/ivrdsl/model/GlobalVariableBean.java)
+的全局静态变量，提供给整个程序使用，它们存放在 [**`GlobalVariableBean`**](./src/main/java/priv/ivrdsl/model/GlobalVariableBean.java)
 中
 
 ------
@@ -347,13 +347,13 @@ IVR DSL Compiler 大致上分为四个层次
 
 | 分层       | 涉及文件夹                                                   | 作用                                      |
 | ---------- | ------------------------------------------------------------ | ----------------------------------------- |
-| 终端显示层 | [priv.ivrdsl.view](http://10.112.112.240:8081/2019211834/ivr-dsl/-/tree/main/src/main/java/priv/ivrdsl/view) | 配置 IVR 程序的 UI 界面                   |
-| Service层  | [priv.ivrdsl.service](http://10.112.112.240:8081/2019211834/ivr-dsl/-/tree/main/src/main/java/priv/ivrdsl/service) | 实现 IVR 解析，脚本运行逻辑等具体业务需求 |
-| Manager层  | [priv.ivrdsl.controller](http://10.112.112.240:8081/2019211834/ivr-dsl/-/tree/main/src/main/java/priv/ivrdsl/controller) | 处理配置文件，数据库查询等通用业务需求    |
-|            | [priv.ivrdsl.util](http://10.112.112.240:8081/2019211834/ivr-dsl/-/tree/main/src/main/java/priv/ivrdsl/util) | 为Service层提供工具类                     |
-| Model层    | [priv.ivrdsl.model](http://10.112.112.240:8081/2019211834/ivr-dsl/-/tree/main/src/main/java/priv/ivrdsl/model) | 项目数据结构                              |
-|            | [priv.ivrdsl.impl](http://10.112.112.240:8081/2019211834/ivr-dsl/-/tree/main/src/main/java/priv/ivrdsl/impl) | 项目接口                                  |
-|            | [priv.ivrdsl.exception](http://10.112.112.240:8081/2019211834/ivr-dsl/-/tree/main/src/main/java/priv/ivrdsl/exception) | 项目自定义异常类型                        |
+| 终端显示层 | [priv.ivrdsl.view](./src/main/java/priv/ivrdsl/view)         | 配置 IVR 程序的 UI 界面                   |
+| Service层  | [priv.ivrdsl.service](./src/main/java/priv/ivrdsl/service)   | 实现 IVR 解析，脚本运行逻辑等具体业务需求 |
+| Manager层  | [priv.ivrdsl.controller](./src/main/java/priv/ivrdsl/controller) | 处理配置文件，数据库查询等通用业务需求    |
+|            | [priv.ivrdsl.util](./src/main/java/priv/ivrdsl/util)         | 为Service层提供工具类                     |
+| Model层    | [priv.ivrdsl.model](./src/main/java/priv/ivrdsl/model)       | 项目数据结构                              |
+|            | [priv.ivrdsl.impl](./src/main/java/priv/ivrdsl/impl)         | 项目接口                                  |
+|            | [priv.ivrdsl.exception](./src/main/java/priv/ivrdsl/exception) | 项目自定义异常类型                        |
 
 而文件夹中每个类的具体作用，请参考[ Javadoc ](#接口文档)文档。
 
@@ -380,7 +380,7 @@ IVR DSL Compiler 大致上分为四个层次
 
 ![image-20211219010417731](img/cov-exception.png)
 
-完整的覆盖率报告：[coverage 文件夹](http://10.112.112.240:8081/2019211834/ivr-dsl/-/blob/main/coverage/index.html)
+完整的覆盖率报告：[**coverage**](./coverage/index.html)
 
 ------
 
@@ -413,4 +413,4 @@ mvn javadoc:javadoc -f pom.xml
 
 ![image-20211219004049153](img/doc-tree.png)
 
-完整的 Javadoc 文档：[apidocs 文件夹](http://10.112.112.240:8081/2019211834/ivr-dsl/-/blob/main/apidocs/index.html)
+完整的 Javadoc 文档：[**apidocs**](./apidocs/index.html)
