@@ -2,8 +2,6 @@ package priv.ivrdsl.impl;
 
 import priv.ivrdsl.util.SqlQueryUtils;
 
-import java.awt.event.ActionEvent;
-
 /**
  * SQL 查询条件接口。覆写接口中的抽象方法 {@code queryCase} 来设定查询条件。
  *
