@@ -1,4 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Commands.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Unit Test Coverage Results</a> &gt; <a href="index.source.html" class="el_package">priv.ivrdsl.model</a> &gt; <span class="el_source">Commands.java</span></div><h1>Commands.java</h1><pre class="source lang-java linenums">package priv.ivrdsl.model;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/>
+    <link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/>
+    <title>Commands.java</title>
+    <link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/>
+    <script type="text/javascript" src="../jacoco-resources/prettify.js"></script>
+</head>
+<body onload="window['PR_TAB_WIDTH']=4;prettyPrint()">
+<div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html"
+                                                              class="el_session">Sessions</a></span><a
+        href="../index.html" class="el_report">Unit Test Coverage Results</a> &gt; <a href="index.source.html"
+                                                                                      class="el_package">priv.ivrdsl.model</a>
+    &gt; <span class="el_source">Commands.java</span></div>
+<h1>Commands.java</h1>
+<pre class="source lang-java linenums">package priv.ivrdsl.model;
 
 import com.beust.jcommander.*;
 
@@ -36,9 +54,11 @@ import java.util.List;
 <span class="fc" id="L36">    public static class CommandConfig {</span>
 <span class="fc" id="L37">        @Parameter(names = {&quot;-appid&quot;}, description = &quot;语音合成 appid&quot;)</span>
         public String appId = null;
-<span class="fc" id="L39">        @Parameter(names = {&quot;-apikey&quot;}, description = &quot;语音合成 apikey&quot;)</span>
+<span class="fc"
+      id="L39">        @Parameter(names = {&quot;-apikey&quot;}, description = &quot;语音合成 apikey&quot;)</span>
         public String apiKey = null;
-<span class="fc" id="L41">        @Parameter(names = {&quot;-secretkey&quot;}, description = &quot;语音合成 secretkey&quot;)</span>
+<span class="fc"
+      id="L41">        @Parameter(names = {&quot;-secretkey&quot;}, description = &quot;语音合成 secretkey&quot;)</span>
         public String secretKey = null;
 <span class="fc" id="L43">        @Parameter(names = {&quot;-name&quot;, &quot;-table&quot;}, description = &quot;数据库连接 待查关系表名&quot;)</span>
         public String table = null;
@@ -53,7 +73,8 @@ import java.util.List;
 <span class="fc" id="L53">        @Parameter(names = {&quot;-help&quot;, &quot;-h&quot;, &quot;?&quot;}, description = &quot;显示帮助&quot;, help = true, hidden = true)</span>
         public boolean help = false;
 
-<span class="fc" id="L56">        public final String apiConfig = &quot;src/main/resources/apikey.properties&quot;;</span>
+<span class="fc"
+      id="L56">        public final String apiConfig = &quot;src/main/resources/apikey.properties&quot;;</span>
 <span class="fc" id="L57">        public final String jdbcConfig = &quot;src/main/resources/jdbc.xml&quot;;</span>
     }
 
@@ -73,7 +94,8 @@ import java.util.List;
 <span class="fc" id="L73">    public static class CommandInit {</span>
 <span class="fc" id="L74">        @Parameter(names = {&quot;-title&quot;}, description = &quot;IVR 程序的标题&quot;)</span>
         public String title = &quot;Voice Menu&quot;;
-<span class="fc" id="L76">        @Parameter(names = {&quot;-playback&quot;}, description = &quot;IVR 程序的欢迎语音&quot;)</span>
+<span class="fc"
+      id="L76">        @Parameter(names = {&quot;-playback&quot;}, description = &quot;IVR 程序的欢迎语音&quot;)</span>
         public String playback = &quot;欢迎致电&quot; + title;
 <span class="fc" id="L78">        @Parameter(names = {&quot;-help&quot;, &quot;-h&quot;, &quot;?&quot;}, description = &quot;显示帮助&quot;, help = true, hidden = true)</span>
         public boolean help = false;
@@ -133,4 +155,8 @@ import java.util.List;
         }
     }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
+</pre>
+<div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>
+</div>
+</body>
+</html>

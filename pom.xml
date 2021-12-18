@@ -68,7 +68,7 @@
                     <charset>UTF-8</charset><!-- utf-8读取文件 -->
                     <encoding>UTF-8</encoding><!-- utf-8进行编码代码 -->
                     <docencoding>UTF-8</docencoding><!-- utf-8进行编码文档 -->
-                    <links>http://docs.Oracle.com/javase/8/docs/api</links>
+                    <links>https://docs.Oracle.com/javase/8/docs/api</links>
                     <show>private</show>
                 </configuration>
                 <executions>
@@ -97,7 +97,7 @@
         <dependency>
             <groupId>com.baidu.aip</groupId>
             <artifactId>java-sdk</artifactId>
-            <version>4.16.2</version>
+            <version>4.16.3</version>
         </dependency>
 
         <!--mp3转pcm-->

@@ -16,6 +16,8 @@
                     <include name="testParameterException2"/>
                     <include name="testParameterException3"/>
                     <include name="testSyntaxException1"/>
+                    <include name="testSyntaxException2"/>
+                    <include name="testSyntaxException3"/>
                 </methods>
             </class>
             <class name="priv.ivrdsl.TestGeneratorUT">

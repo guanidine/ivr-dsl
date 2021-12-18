@@ -1,4 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>XmlOperator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Unit Test Coverage Results</a> &gt; <a href="index.source.html" class="el_package">priv.ivrdsl.controller</a> &gt; <span class="el_source">XmlOperator.java</span></div><h1>XmlOperator.java</h1><pre class="source lang-java linenums">package priv.ivrdsl.controller;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/>
+    <link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/>
+    <title>XmlOperator.java</title>
+    <link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/>
+    <script type="text/javascript" src="../jacoco-resources/prettify.js"></script>
+</head>
+<body onload="window['PR_TAB_WIDTH']=4;prettyPrint()">
+<div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html"
+                                                              class="el_session">Sessions</a></span><a
+        href="../index.html" class="el_report">Unit Test Coverage Results</a> &gt; <a href="index.source.html"
+                                                                                      class="el_package">priv.ivrdsl.controller</a>
+    &gt; <span class="el_source">XmlOperator.java</span></div>
+<h1>XmlOperator.java</h1>
+<pre class="source lang-java linenums">package priv.ivrdsl.controller;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -137,7 +155,8 @@ import java.util.List;
     private static void write2Xml(Document document, String filePath) throws IOException {
 <span class="pc bpc" id="L138" title="1 of 2 branches missed.">        if (hasFile(filePath)) {</span>
 <span class="fc" id="L139">            OutputFormat formatter = OutputFormat.createPrettyPrint();</span>
-<span class="fc" id="L140">            XMLWriter writer = new XMLWriter(new FileOutputStream(filePath), formatter);</span>
+<span class="fc"
+      id="L140">            XMLWriter writer = new XMLWriter(new FileOutputStream(filePath), formatter);</span>
 <span class="fc" id="L141">            writer.write(document);</span>
 <span class="fc" id="L142">            writer.close();</span>
         }
@@ -183,4 +202,8 @@ import java.util.List;
 <span class="fc" id="L183">        return true;</span>
     }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
+</pre>
+<div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>
+</div>
+</body>
+</html>

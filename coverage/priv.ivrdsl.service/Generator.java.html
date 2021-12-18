@@ -1,4 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Generator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Unit Test Coverage Results</a> &gt; <a href="index.source.html" class="el_package">priv.ivrdsl.service</a> &gt; <span class="el_source">Generator.java</span></div><h1>Generator.java</h1><pre class="source lang-java linenums">package priv.ivrdsl.service;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/>
+    <link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/>
+    <title>Generator.java</title>
+    <link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/>
+    <script type="text/javascript" src="../jacoco-resources/prettify.js"></script>
+</head>
+<body onload="window['PR_TAB_WIDTH']=4;prettyPrint()">
+<div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html"
+                                                              class="el_session">Sessions</a></span><a
+        href="../index.html" class="el_report">Unit Test Coverage Results</a> &gt; <a href="index.source.html"
+                                                                                      class="el_package">priv.ivrdsl.service</a>
+    &gt; <span class="el_source">Generator.java</span></div>
+<h1>Generator.java</h1>
+<pre class="source lang-java linenums">package priv.ivrdsl.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -164,7 +182,8 @@ public class Generator {
 <span class="fc" id="L164">                generateEvent(path, event, action, additions);</span>
             }
 <span class="fc" id="L166">        }</span>
-<span class="fc" id="L167">        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filename))) {</span>
+<span class="fc"
+      id="L167">        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filename))) {</span>
 <span class="fc" id="L168">            bufferedWriter.write(ivrBuilder.toString());</span>
 <span class="nc" id="L169">        } catch (IOException e) {</span>
 <span class="nc" id="L170">            e.printStackTrace();</span>
@@ -208,7 +227,8 @@ public class Generator {
 <span class="fc bfc" id="L208" title="All 2 branches covered.">        String isFinal = &quot;menu&quot;.equalsIgnoreCase(action) ? &quot;false&quot; :</span>
 <span class="pc bpc" id="L209" title="1 of 3 branches missed.">                switch (Objects.requireNonNull(EnumBean.Action.getByCode(action))) {</span>
 <span class="fc" id="L210">                    case ACTION_CALL, ACTION_INFO, ACTION_HANGUP, ACTION_MANUAL, ACTION_RECORD -&gt; &quot;true&quot;;</span>
-<span class="fc" id="L211">                    case ACTION_REPLAY, ACTION_BACK, ACTION_MENU -&gt; &quot;false&quot;;</span>
+<span class="fc"
+      id="L211">                    case ACTION_REPLAY, ACTION_BACK, ACTION_MENU -&gt; &quot;false&quot;;</span>
                 };
 <span class="fc" id="L213">        String init = String.format(&quot;&quot;&quot;</span>
                                 EventBean %s = new EventBean(&quot;%s&quot;, &quot;%s&quot;, &quot;%s&quot;, &quot;%s&quot;);
@@ -223,4 +243,8 @@ public class Generator {
 <span class="fc" id="L223">        idx += init.length();</span>
 <span class="fc" id="L224">    }</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
+</pre>
+<div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>
+</div>
+</body>
+</html>
