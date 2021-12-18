@@ -12,7 +12,7 @@ IVR DSL Compiler 是在 Idea 编写的项目，并使用 maven 框架维护依�
 
 在 Idea 创建项目时选择 `Get from Version Control`，并输入项目的 url 可以直接将项目从 GitLab 中克隆下来，Idea 会自动加载 maven 并安装需要的依赖。在后台进程全部运行结束后，找到 `src/main/java/priv/ivrdsl/Application.java` 中的 `main` 接口即可直接运行。
 
-![image-20211218175821741](C:\Users\16402\AppData\Roaming\Typora\typora-user-images\image-20211218175821741.png)
+![image-20211218175821741](img/git.png)
 
 `Application` 提供了两种运行方式：
 
@@ -24,7 +24,7 @@ IVR DSL Compiler 是在 Idea 编写的项目，并使用 maven 框架维护依�
 * 文件夹 `src/main/java/priv/ivrdsl` 中会生成 `VoiceMenu.java` 程序，可以直接在项目中运行、调试 IVR 程序。
 * 项目文件夹下会生成 `release` 文件夹（如果该文件夹原先不存在的话），其中包含 `VoiceMenu.java` 程序和一个由所有项目代码和依赖打包成的 `jar` 包。将 `VoiceMenu.java` 复制到其他项目中，并引入 `jar` 包，就可以在其他项目中运行 IVR 程序。
 
-![image-20211218180241508](C:\Users\16402\AppData\Roaming\Typora\typora-user-images\image-20211218180241508.png)
+![image-20211218180241508](img/jar.png)
 
 ## 脚本语法
 
@@ -131,7 +131,7 @@ remove 0*59
 
 `status` 语句不需要参数，用以查看当前事件的逻辑树。
 
-![image-20211218214028328](C:\Users\16402\AppData\Roaming\Typora\typora-user-images\image-20211218214028328.png)
+![image-20211218214028328](img/status.png)
 
 ### export
 
@@ -295,11 +295,11 @@ IVR DSL Compiler 大致上分为四个层次
 
 项目为IVR DSL Compiler 的 Service 层，Manager 层和 Model 层的方法做了单元测试，包括预期异常测试和各工具类的测试，共有 $64$ 个测试案例。
 
-![image-20211218212223188](C:\Users\16402\AppData\Roaming\Typora\typora-user-images\image-20211218212223188.png)
+![image-20211218212223188](img/test.png)
 
 排除掉 `priv.ivrdsl.view` 包，接口类 `Application` ，`export --debug` 生成的结果 `VoiceMenu` 以及 IVR 脚本程序才会用到的 `EventBean` 和 `EventLogic` 类后，测试代码覆盖 $83\%$ 的类，$77\%$ 的代码行，对项目中创建的方法完成了基本的测试
 
-![image-20211218212311400](C:\Users\16402\AppData\Roaming\Typora\typora-user-images\image-20211218212311400.png)
+![image-20211218212311400](img/coverage.png)
 
 [coverage 文件夹](http://10.112.112.240:8081/2019211834/ivr-dsl/-/blob/main/coverage/index.html)
 
