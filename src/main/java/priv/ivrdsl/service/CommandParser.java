@@ -133,7 +133,7 @@ public class CommandParser {
                     gen.generateIvr();
                 } else {
                     String url = (cm.export.exportPath.length() == 0 || cm.export.exportPath.endsWith("/") || cm.export.exportPath.endsWith("\\")) ?
-                            cm.export.exportPath + "VoiceMenu" : cm.export.exportPath + "/VoiceMenu";
+                            cm.export.exportPath + "release" : cm.export.exportPath + "/release";
                     File dir = new File(url);
                     if (!dir.exists()) {
                         if (!dir.mkdir()) {

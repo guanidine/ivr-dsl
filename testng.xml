@@ -3,18 +3,13 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="D:/JetBrainsProjects/ivr-dsl/src/test/java/priv/ivrdsl">
         <classes>
-            <class name="priv.ivrdsl.global.TestCompiler">
-                <methods>
-                    <include name="testFileExport"/>
-                </methods>
-            </class>
-            <class name="priv.ivrdsl.unit.TestControllerUT">
+            <class name="priv.ivrdsl.TestControllerUT">
                 <methods>
                     <include name="testJdbcSetter"/>
                     <include name="testApiSetter"/>
                 </methods>
             </class>
-            <class name="priv.ivrdsl.unit.TestExceptionUT">
+            <class name="priv.ivrdsl.TestExceptionUT">
                 <methods>
                     <include name="testDatabasePropsException"/>
                     <include name="testParameterException1"/>
@@ -23,7 +18,7 @@
                     <include name="testSyntaxException1"/>
                 </methods>
             </class>
-            <class name="priv.ivrdsl.unit.TestGeneratorUT">
+            <class name="priv.ivrdsl.TestGeneratorUT">
                 <methods>
                     <include name="testParseCommand"/>
                     <include name="testCommandParser"/>
@@ -31,7 +26,7 @@
                     <include name="testExport"/>
                 </methods>
             </class>
-            <class name="priv.ivrdsl.unit.TestUtilsUT">
+            <class name="priv.ivrdsl.TestUtilsUT">
                 <methods>
                     <include name="testRemoveLastChar"/>
                     <include name="testGetLastChar"/>
@@ -50,10 +45,10 @@
             </run>
         </groups>
         <classes>
-            <class name="priv.ivrdsl.unit.TestControllerUT"/>
-            <class name="priv.ivrdsl.unit.TestExceptionUT"/>
-            <class name="priv.ivrdsl.unit.TestGeneratorUT"/>
-            <class name="priv.ivrdsl.unit.TestUtilsUT"/>
+            <class name="priv.ivrdsl.TestControllerUT"/>
+            <class name="priv.ivrdsl.TestExceptionUT"/>
+            <class name="priv.ivrdsl.TestGeneratorUT"/>
+            <class name="priv.ivrdsl.TestUtilsUT"/>
         </classes>
     </test>
 </suite>

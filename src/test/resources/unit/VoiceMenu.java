@@ -20,66 +20,66 @@ public class VoiceMenu implements ActionListener {
     public static VoiceMenu instance;
 
     public static void initHashMap() {
-        EventBean Action_0_xlo8kt = new EventBean("Home", "China-Mobile", "0");
-        Action_0_xlo8kt.setAction("", true);
+        EventBean Action_0_s2y3pj = new EventBean("Home", "China-Mobile", "0");
+        Action_0_s2y3pj.setAction("", true);
 
-        Action_0_xlo8kt.setAdditions("欢迎致电申国移动");
+        Action_0_s2y3pj.setAdditions("欢迎致电申国移动");
 
-        GlobalVariableBean.event2TriggerMap.put("0", Action_0_xlo8kt);
+        GlobalVariableBean.event2TriggerMap.put("0", Action_0_s2y3pj);
 
-        EventBean Action_01_xlo8kt = new EventBean("Action_01", "转接服务", "1");
-        GlobalVariableBean.event2TriggerMap.put("01", Action_01_xlo8kt);
-        Action_01_xlo8kt.setAction("call", true);
-        Action_01_xlo8kt.setAdditions("分号123");
-        Action_0_xlo8kt.addChild(Action_01_xlo8kt);
+        EventBean Action_01_s2y3pj = new EventBean("Action_01", "转接服务", "1");
+        GlobalVariableBean.event2TriggerMap.put("01", Action_01_s2y3pj);
+        Action_01_s2y3pj.setAction("call", true);
+        Action_01_s2y3pj.setAdditions("分号123");
+        Action_0_s2y3pj.addChild(Action_01_s2y3pj);
 
-        EventBean Action_02_xlo8kt = new EventBean("Action_02", "信息业务", "2");
-        GlobalVariableBean.event2TriggerMap.put("02", Action_02_xlo8kt);
-        Action_02_xlo8kt.setAction("info", true);
-        Action_02_xlo8kt.setAdditions("tbDataPlan");
-        Action_0_xlo8kt.addChild(Action_02_xlo8kt);
+        EventBean Action_02_s2y3pj = new EventBean("Action_02", "信息业务", "2");
+        GlobalVariableBean.event2TriggerMap.put("02", Action_02_s2y3pj);
+        Action_02_s2y3pj.setAction("info", true);
+        Action_02_s2y3pj.setAdditions("tbDataPlan");
+        Action_0_s2y3pj.addChild(Action_02_s2y3pj);
 
-        EventBean Action_00_xlo8kt = new EventBean("Action_00", "投诉", "0");
-        GlobalVariableBean.event2TriggerMap.put("00", Action_00_xlo8kt);
-        Action_00_xlo8kt.setAction("menu", false);
-        Action_00_xlo8kt.setAdditions("");
-        Action_0_xlo8kt.addChild(Action_00_xlo8kt);
+        EventBean Action_00_s2y3pj = new EventBean("Action_00", "投诉", "0");
+        GlobalVariableBean.event2TriggerMap.put("00", Action_00_s2y3pj);
+        Action_00_s2y3pj.setAction("menu", false);
+        Action_00_s2y3pj.setAdditions("");
+        Action_0_s2y3pj.addChild(Action_00_s2y3pj);
 
-        EventBean Action_009_xlo8kt = new EventBean("Action_009", "返回上级菜单", "9");
-        GlobalVariableBean.event2TriggerMap.put("009", Action_009_xlo8kt);
-        Action_009_xlo8kt.setAction("back", false);
-        Action_009_xlo8kt.setAdditions("");
-        Action_00_xlo8kt.addChild(Action_009_xlo8kt);
+        EventBean Action_009_s2y3pj = new EventBean("Action_009", "返回上级菜单", "9");
+        GlobalVariableBean.event2TriggerMap.put("009", Action_009_s2y3pj);
+        Action_009_s2y3pj.setAction("back", false);
+        Action_009_s2y3pj.setAdditions("");
+        Action_00_s2y3pj.addChild(Action_009_s2y3pj);
 
-        EventBean Action_000_xlo8kt = new EventBean("Action_000", "投诉", "0");
-        GlobalVariableBean.event2TriggerMap.put("000", Action_000_xlo8kt);
-        Action_000_xlo8kt.setAction("menu", false);
-        Action_000_xlo8kt.setAdditions("");
-        Action_00_xlo8kt.addChild(Action_000_xlo8kt);
+        EventBean Action_000_s2y3pj = new EventBean("Action_000", "投诉", "0");
+        GlobalVariableBean.event2TriggerMap.put("000", Action_000_s2y3pj);
+        Action_000_s2y3pj.setAction("menu", false);
+        Action_000_s2y3pj.setAdditions("");
+        Action_00_s2y3pj.addChild(Action_000_s2y3pj);
 
-        EventBean Action_0009_xlo8kt = new EventBean("Action_0009", "返回上级菜单", "9");
-        GlobalVariableBean.event2TriggerMap.put("0009", Action_0009_xlo8kt);
-        Action_0009_xlo8kt.setAction("back", false);
-        Action_0009_xlo8kt.setAdditions("");
-        Action_000_xlo8kt.addChild(Action_0009_xlo8kt);
+        EventBean Action_0009_s2y3pj = new EventBean("Action_0009", "返回上级菜单", "9");
+        GlobalVariableBean.event2TriggerMap.put("0009", Action_0009_s2y3pj);
+        Action_0009_s2y3pj.setAction("back", false);
+        Action_0009_s2y3pj.setAdditions("");
+        Action_000_s2y3pj.addChild(Action_0009_s2y3pj);
 
-        EventBean Action_0000_xlo8kt = new EventBean("Action_0000", "结束通话", "0");
-        GlobalVariableBean.event2TriggerMap.put("0000", Action_0000_xlo8kt);
-        Action_0000_xlo8kt.setAction("hangup", true);
-        Action_0000_xlo8kt.setAdditions("");
-        Action_000_xlo8kt.addChild(Action_0000_xlo8kt);
+        EventBean Action_0000_s2y3pj = new EventBean("Action_0000", "结束通话", "0");
+        GlobalVariableBean.event2TriggerMap.put("0000", Action_0000_s2y3pj);
+        Action_0000_s2y3pj.setAction("hangup", true);
+        Action_0000_s2y3pj.setAdditions("");
+        Action_000_s2y3pj.addChild(Action_0000_s2y3pj);
 
-        EventBean Action_00a_xlo8kt = new EventBean("Action_00a", "测试星号按键", "*");
-        GlobalVariableBean.event2TriggerMap.put("00*", Action_00a_xlo8kt);
-        Action_00a_xlo8kt.setAction("call", true);
-        Action_00a_xlo8kt.setAdditions("");
-        Action_00_xlo8kt.addChild(Action_00a_xlo8kt);
+        EventBean Action_00a_s2y3pj = new EventBean("Action_00a", "测试星号按键", "*");
+        GlobalVariableBean.event2TriggerMap.put("00*", Action_00a_s2y3pj);
+        Action_00a_s2y3pj.setAction("call", true);
+        Action_00a_s2y3pj.setAdditions("");
+        Action_00_s2y3pj.addChild(Action_00a_s2y3pj);
 
-        EventBean Action_00b_xlo8kt = new EventBean("Action_00b", "测试井号按键", "#");
-        GlobalVariableBean.event2TriggerMap.put("00#", Action_00b_xlo8kt);
-        Action_00b_xlo8kt.setAction("hangup", true);
-        Action_00b_xlo8kt.setAdditions("");
-        Action_00_xlo8kt.addChild(Action_00b_xlo8kt);
+        EventBean Action_00b_s2y3pj = new EventBean("Action_00b", "测试井号按键", "#");
+        GlobalVariableBean.event2TriggerMap.put("00#", Action_00b_s2y3pj);
+        Action_00b_s2y3pj.setAction("hangup", true);
+        Action_00b_s2y3pj.setAdditions("");
+        Action_00_s2y3pj.addChild(Action_00b_s2y3pj);
 
     }
 
