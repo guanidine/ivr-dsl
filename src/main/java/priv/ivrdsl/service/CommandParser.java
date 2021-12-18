@@ -97,6 +97,7 @@ public class CommandParser {
                 if (cm.add.help) {
                     jc.usage();
                 }
+                /* 根节点下事件不能设置为 back 动作 */
                 if (path.length() < 3 && "back".equalsIgnoreCase(cm.add.action)) {
                     throw new SyntaxErrorException("ERROR: Cannot execute \"back\" action in the main menu, " +
                             "got (add -event=" + cm.add.event + " -action=back)");

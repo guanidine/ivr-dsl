@@ -17,7 +17,7 @@ public class DataAccessor {
      *
      * @param table 查询目标关系表
      * @return 处理后的查询结果
-     * @see QueryCaseImpl#queryCase()
+     * @see QueryCaseImpl#queryCase
      */
     public static String data2String(String table, QueryCaseImpl queryCase) {
         StringBuilder sb = new StringBuilder();

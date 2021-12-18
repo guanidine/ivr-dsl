@@ -1,22 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
-<head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-    <link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/>
-    <link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/>
-    <title>XmlOperator.java</title>
-    <link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/>
-    <script type="text/javascript" src="../jacoco-resources/prettify.js"></script>
-</head>
-<body onload="window['PR_TAB_WIDTH']=4;prettyPrint()">
-<div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html"
-                                                              class="el_session">Sessions</a></span><a
-        href="../index.html" class="el_report">TestUtils Coverage Results, TestGenerator Coverage Results, TestException
-    Coverage Results</a> &gt; <a href="index.source.html" class="el_package">priv.ivrdsl.controller</a> &gt; <span
-        class="el_source">XmlOperator.java</span></div>
-<h1>XmlOperator.java</h1>
-<pre class="source lang-java linenums">package priv.ivrdsl.controller;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>XmlOperator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Unit Test Coverage Results</a> &gt; <a href="index.source.html" class="el_package">priv.ivrdsl.controller</a> &gt; <span class="el_source">XmlOperator.java</span></div><h1>XmlOperator.java</h1><pre class="source lang-java linenums">package priv.ivrdsl.controller;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -47,19 +29,19 @@ import java.util.List;
      */
     public static void add(JdbcBean jdbc, String filePath) {
         try {
-<span class="nc" id="L32">            Document document = getDocument(new FileInputStream(filePath));</span>
-<span class="nc" id="L33">            Element rootNode = document.getRootElement();</span>
-<span class="nc" id="L34">            Element node = rootNode.addElement(&quot;jdbc&quot;);</span>
-<span class="nc" id="L35">            node.addAttribute(&quot;name&quot;, jdbc.getName());</span>
-<span class="nc" id="L36">            node.addElement(&quot;driver&quot;).setText(jdbc.getDriver());</span>
-<span class="nc" id="L37">            node.addElement(&quot;url&quot;).setText(jdbc.getUrl());</span>
-<span class="nc" id="L38">            node.addElement(&quot;user&quot;).setText(jdbc.getUser());</span>
-<span class="nc" id="L39">            node.addElement(&quot;passwd&quot;).setText(jdbc.getPasswd());</span>
-<span class="nc" id="L40">            write2Xml(document, filePath);</span>
+<span class="fc" id="L32">            Document document = getDocument(new FileInputStream(filePath));</span>
+<span class="fc" id="L33">            Element rootNode = document.getRootElement();</span>
+<span class="fc" id="L34">            Element node = rootNode.addElement(&quot;jdbc&quot;);</span>
+<span class="fc" id="L35">            node.addAttribute(&quot;name&quot;, jdbc.getName());</span>
+<span class="fc" id="L36">            node.addElement(&quot;driver&quot;).setText(jdbc.getDriver());</span>
+<span class="fc" id="L37">            node.addElement(&quot;url&quot;).setText(jdbc.getUrl());</span>
+<span class="fc" id="L38">            node.addElement(&quot;user&quot;).setText(jdbc.getUser());</span>
+<span class="fc" id="L39">            node.addElement(&quot;passwd&quot;).setText(jdbc.getPasswd());</span>
+<span class="fc" id="L40">            write2Xml(document, filePath);</span>
 <span class="nc" id="L41">        } catch (Exception e) {</span>
 <span class="nc" id="L42">            throw new RuntimeException();</span>
-<span class="nc" id="L43">        }</span>
-<span class="nc" id="L44">    }</span>
+<span class="fc" id="L43">        }</span>
+<span class="fc" id="L44">    }</span>
 
     /**
      * 在配置文件中查找一个 jdbc 配置项。
@@ -71,7 +53,7 @@ import java.util.List;
         try {
 <span class="fc" id="L54">            Document document = getDocument(is);</span>
 <span class="fc" id="L55">            Element e = (Element) document.selectSingleNode(&quot;//jdbc[@name=\&quot;%s\&quot;]&quot;.formatted(name));</span>
-<span class="pc bpc" id="L56" title="1 of 2 branches missed.">            if (e != null) {</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">            if (e != null) {</span>
 <span class="fc" id="L57">                return new JdbcBean(</span>
 <span class="fc" id="L58">                        e.attributeValue(&quot;name&quot;),</span>
 <span class="fc" id="L59">                        e.element(&quot;driver&quot;).getText(),</span>
@@ -80,7 +62,7 @@ import java.util.List;
 <span class="fc" id="L62">                        e.element(&quot;passwd&quot;).getText()</span>
                 );
             } else {
-<span class="nc" id="L65">                return null;</span>
+<span class="fc" id="L65">                return null;</span>
             }
 <span class="nc" id="L67">        } catch (Exception e) {</span>
 <span class="nc" id="L68">            throw new RuntimeException();</span>
@@ -105,8 +87,8 @@ import java.util.List;
      * @see JdbcSetter#setJdbc
      */
     public static JdbcBean find(String name, String filePath) throws IOException {
-<span class="nc bnc" id="L90" title="All 2 branches missed.">        if (hasFile(filePath)) {</span>
-<span class="nc" id="L91">            return find(name, new FileInputStream(filePath));</span>
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">        if (hasFile(filePath)) {</span>
+<span class="fc" id="L91">            return find(name, new FileInputStream(filePath));</span>
         }
 <span class="nc" id="L93">        return null;</span>
     }
@@ -119,19 +101,19 @@ import java.util.List;
      */
     public static void delete(String name, String filePath) {
         try {
-<span class="nc" id="L104">            Document document = getDocument(new FileInputStream(filePath));</span>
-<span class="nc" id="L105">            Element root = document.getRootElement();</span>
-<span class="nc" id="L106">            List&lt;Element&gt; list = root.elements();</span>
-<span class="nc bnc" id="L107" title="All 2 branches missed.">            for (Element e : list) {</span>
-<span class="nc bnc" id="L108" title="All 2 branches missed.">                if (e.attributeValue(&quot;name&quot;).equals(name)) {</span>
-<span class="nc" id="L109">                    e.detach();</span>
+<span class="fc" id="L104">            Document document = getDocument(new FileInputStream(filePath));</span>
+<span class="fc" id="L105">            Element root = document.getRootElement();</span>
+<span class="fc" id="L106">            List&lt;Element&gt; list = root.elements();</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">            for (Element e : list) {</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">                if (e.attributeValue(&quot;name&quot;).equals(name)) {</span>
+<span class="fc" id="L109">                    e.detach();</span>
                 }
-<span class="nc" id="L111">            }</span>
-<span class="nc" id="L112">            write2Xml(document, filePath);</span>
+<span class="fc" id="L111">            }</span>
+<span class="fc" id="L112">            write2Xml(document, filePath);</span>
 <span class="nc" id="L113">        } catch (Exception e) {</span>
 <span class="nc" id="L114">            throw new RuntimeException();</span>
-<span class="nc" id="L115">        }</span>
-<span class="nc" id="L116">    }</span>
+<span class="fc" id="L115">        }</span>
+<span class="fc" id="L116">    }</span>
 
     /**
      * 更改配置文件中的 jdbc 配置项。
@@ -140,9 +122,9 @@ import java.util.List;
      * @param filePath 配置文件路径
      */
     public static void alter(JdbcBean jdbc, String filePath) {
-<span class="nc" id="L125">        delete(jdbc.getName(), filePath);</span>
-<span class="nc" id="L126">        add(jdbc, filePath);</span>
-<span class="nc" id="L127">    }</span>
+<span class="fc" id="L125">        delete(jdbc.getName(), filePath);</span>
+<span class="fc" id="L126">        add(jdbc, filePath);</span>
+<span class="fc" id="L127">    }</span>
 
     /**
      * 将内存中的内容写入 xml 配置文件。
@@ -153,14 +135,13 @@ import java.util.List;
      * @see Document
      */
     private static void write2Xml(Document document, String filePath) throws IOException {
-<span class="nc bnc" id="L138" title="All 2 branches missed.">        if (hasFile(filePath)) {</span>
-<span class="nc" id="L139">            OutputFormat formatter = OutputFormat.createPrettyPrint();</span>
-<span class="nc"
-      id="L140">            XMLWriter writer = new XMLWriter(new FileOutputStream(filePath), formatter);</span>
-<span class="nc" id="L141">            writer.write(document);</span>
-<span class="nc" id="L142">            writer.close();</span>
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">        if (hasFile(filePath)) {</span>
+<span class="fc" id="L139">            OutputFormat formatter = OutputFormat.createPrettyPrint();</span>
+<span class="fc" id="L140">            XMLWriter writer = new XMLWriter(new FileOutputStream(filePath), formatter);</span>
+<span class="fc" id="L141">            writer.write(document);</span>
+<span class="fc" id="L142">            writer.close();</span>
         }
-<span class="nc" id="L144">    }</span>
+<span class="fc" id="L144">    }</span>
 
     /**
      * 获得操作 xml 的 {@code Document} 对象
@@ -182,28 +163,24 @@ import java.util.List;
      * @throws IOException 读写配置文件失败
      */
     private static boolean hasFile(String filePath) throws IOException {
-<span class="nc" id="L166">        File file = new File(filePath);</span>
-<span class="nc bnc" id="L167" title="All 2 branches missed.">        if (!file.exists()) {</span>
-<span class="nc bnc" id="L168" title="All 2 branches missed.">            if (file.createNewFile()) {</span>
-<span class="nc" id="L169">                String init = &quot;&quot;&quot;</span>
+<span class="fc" id="L166">        File file = new File(filePath);</span>
+<span class="fc bfc" id="L167" title="All 2 branches covered.">        if (!file.exists()) {</span>
+<span class="pc bpc" id="L168" title="1 of 2 branches missed.">            if (file.createNewFile()) {</span>
+<span class="fc" id="L169">                String init = &quot;&quot;&quot;</span>
                         &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
                         &lt;properties&gt;
                         &lt;/properties&gt;
                         &quot;&quot;&quot;;
-<span class="nc" id="L174">                try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {</span>
-<span class="nc" id="L175">                    bufferedWriter.write(init);</span>
+<span class="fc" id="L174">                try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {</span>
+<span class="fc" id="L175">                    bufferedWriter.write(init);</span>
 <span class="nc" id="L176">                } catch (IOException e) {</span>
 <span class="nc" id="L177">                    e.printStackTrace();</span>
-<span class="nc" id="L178">                }</span>
-<span class="nc" id="L179">            } else {</span>
+<span class="fc" id="L178">                }</span>
+<span class="fc" id="L179">            } else {</span>
 <span class="nc" id="L180">                throw new FileNotFoundException();</span>
             }
         }
-<span class="nc" id="L183">        return true;</span>
+<span class="fc" id="L183">        return true;</span>
     }
 }
-</pre>
-<div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>
-</div>
-</body>
-</html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

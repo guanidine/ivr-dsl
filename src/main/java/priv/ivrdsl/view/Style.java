@@ -24,6 +24,9 @@ public class Style {
     public static JPanel phone = new JPanel(new BorderLayout(5, 0));
     public static JPanel panelOfButtons = new JPanel(new GridLayout(4, 3, 2, 2));
 
+    /**
+     * 按键 UI 设计。
+     */
     private static void customizeButton(JButton button, Border border, Dimension dim, Color color) {
         button.setBackground(color);
         button.setOpaque(true);
@@ -31,6 +34,11 @@ public class Style {
         button.setBorder(border);
     }
 
+    /**
+     * 读取事件根节点下的子节点列表。
+     *
+     * @throws IOException 音频文件读写失败
+     */
     private static void readChildren() throws IOException {
         EventBean tmp = GlobalVariableBean.event2TriggerMap.get("0");
         GlobalVariableBean.voiceOutput.addText(tmp.getAdditions());
@@ -41,6 +49,9 @@ public class Style {
         GlobalVariableBean.voiceOutput.speak();
     }
 
+    /**
+     * 按键监听。
+     */
     private static void addListeners(JButton call, JButton end) {
         call.addActionListener(p0 -> {
             if (!GlobalVariableBean.hasStarted) {
@@ -65,6 +76,9 @@ public class Style {
         });
     }
 
+    /**
+     * 按键被触发 UI 设计。
+     */
     private static void setCallButtons(JPanel panel) {
         Border border = new LineBorder(Color.white, 22);
         Border emptyBorder = new LineBorder(Color.white, 10);
@@ -81,6 +95,9 @@ public class Style {
         panel.add(buttonEnd, BorderLayout.LINE_END);
     }
 
+    /**
+     * 分割线 UI 设计。
+     */
     private static void setDeliminatorLine(JPanel panel) {
         JPanel topLine = new JPanel();
         topLine.setBackground(Color.lightGray);
@@ -109,11 +126,17 @@ public class Style {
         }
     }
 
+    /**
+     * 文字输出窗口 UI 设计。
+     */
     private static void setScreen(JTextArea myScreen) {
         myScreen.setFont(new Font("Arial", Font.PLAIN, 16));
         myScreen.setMargin(new Insets(5, 5, 5, 5));
     }
 
+    /**
+     * UI 顶部面板设计。
+     */
     private static void setTopPanel(JPanel topPanel) {
         JPanel myHeader = new JPanel(new BorderLayout(0, 0));
         setScreen(screen);
@@ -121,6 +144,9 @@ public class Style {
         topPanel.add(screen, BorderLayout.SOUTH);
     }
 
+    /**
+     * UI 主体面板设计。
+     */
     private static void setMainPanel(JPanel myPhone) {
         JPanel topPanel = new JPanel(new BorderLayout(0, 0));
         JPanel myLine = new JPanel(new BorderLayout(0, 0));
@@ -147,7 +173,7 @@ public class Style {
     }
 
     /**
-     * JFrame UI 内容分配置。
+     * JFrame UI 内容部分配置。
      */
     public static void setContent() {
         setMainPanel(phone);

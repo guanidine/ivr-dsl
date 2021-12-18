@@ -20,10 +20,15 @@ import static priv.ivrdsl.util.StringProcessUtils.removeLastChar;
  */
 @Slf4j
 public class Generator {
+    /** 代码块位置 */
     private int idx;
+    /** 输出路径 */
     private final String filename;
+    /** 程序代码字符串构造器 */
     private final StringBuilder ivrBuilder;
+    /** 每一个生成的程序独有的 ID */
     private final String eventRandomName;
+    /** 代码生成依据的逻辑 */
     private final IvrMap schema;
 
     /**
@@ -57,11 +62,24 @@ public class Generator {
                 import java.awt.event.ActionListener;
                 import java.io.IOException;
 
+                /**
+                 * IVR 主程序。调用 {@code main} 方法运行。
+                 * <p>
+                 * 由 IVR DSL Compiler 自动生成，运行 {@code Application} 以调用 Compiler 的接口。
+                 *
+                 * @author Guanidine Beryllium
+                 * @see Application
+                 */
                 public class VoiceMenu implements ActionListener {
 
-
+                    /** 初始化一个事件监听实例 */
                     public static VoiceMenu instance;
 
+                    /**
+                     * 构造 trigger-event 树。
+                     *
+                     * @see priv.ivrdsl.model.IvrMap
+                     */
                     public static void initHashMap() {
                 """;
         String end = """
@@ -163,20 +181,18 @@ public class Generator {
     private void generateTitle(String title, String additions) {
         String homeUtilName = "Action_0" + eventRandomName;
         String init = String.format("""
-                        EventBean %s = new EventBean("Home", "%s", "0");
+                        EventBean %s = new EventBean("Home", "%s", "0", "%s");
                         %s.setAction("", true);
-                                
-                        %s.setAdditions("%s");
                                 
                         GlobalVariableBean.event2TriggerMap.put("0", %s);
                         
-                """, homeUtilName, title, homeUtilName, homeUtilName, additions, homeUtilName);
+                """, homeUtilName, title, additions, homeUtilName, homeUtilName);
         ivrBuilder.insert(idx, init);
         idx += init.length();
     }
 
     /**
-     * 生成事件构造代码。
+     * 生成事件部分代码。
      *
      * @param trigger   触发此处事件的按键路径。根节点路径为“0”，所以所有事件路径都需要加上根节点的“0”，如先后按键“9”“#”触发的事件，其路径为“09#”
      * @param event     语音播放使用的事件名
@@ -195,14 +211,13 @@ public class Generator {
                     case ACTION_REPLAY, ACTION_BACK, ACTION_MENU -> "false";
                 };
         String init = String.format("""
-                                EventBean %s = new EventBean("%s", "%s", "%s");
+                                EventBean %s = new EventBean("%s", "%s", "%s", "%s");
                                 GlobalVariableBean.event2TriggerMap.put("%s", %s);
                                 %s.setAction("%s", %s);
-                                %s.setAdditions("%s");
                                 %s.addChild(%s);
                                                 
-                        """, eventUtilName, eventName, event, getLastChar(trigger), trigger, eventUtilName,
-                eventUtilName, action, isFinal, eventUtilName, additions, parentUtilName, eventUtilName);
+                        """, eventUtilName, eventName, event, getLastChar(trigger), additions, trigger, eventUtilName,
+                eventUtilName, action, isFinal, parentUtilName, eventUtilName);
 
         ivrBuilder.insert(idx, init);
         idx += init.length();

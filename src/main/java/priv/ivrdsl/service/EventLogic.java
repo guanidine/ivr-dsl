@@ -26,6 +26,9 @@ public class EventLogic {
      * @throws IOException          音频文件读写失败
      * @throws InterruptedException 线程中断失败
      * @throws DocumentException    xml 配置文件读取失败
+     * @see GlobalVariableBean#curTriggerPath
+     * @see GlobalVariableBean#voiceOutput
+     * @see GlobalVariableBean#event2TriggerMap
      */
     public static void runLogic(ActionEvent event, QueryCaseImpl queryCase) throws IOException, InterruptedException, DocumentException {
         detectError(event);

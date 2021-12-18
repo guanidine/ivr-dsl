@@ -69,6 +69,7 @@
                     <encoding>UTF-8</encoding><!-- utf-8进行编码代码 -->
                     <docencoding>UTF-8</docencoding><!-- utf-8进行编码文档 -->
                     <links>http://docs.Oracle.com/javase/8/docs/api</links>
+                    <show>private</show>
                 </configuration>
                 <executions>
                     <execution>

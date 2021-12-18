@@ -3,7 +3,6 @@ package priv.ivrdsl.util;
 import lombok.extern.slf4j.Slf4j;
 import priv.ivrdsl.model.GlobalVariableBean;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static priv.ivrdsl.util.SpeechSynthesisUtils.mp3AudioPlay;
@@ -16,15 +15,19 @@ import static priv.ivrdsl.util.SpeechSynthesisUtils.mp3AudioPlay;
 @Slf4j
 public class VoiceOutputUtils {
 
+    /** 控制 IVR 运行和结束的线程 */
     public static Thread waitingThr = new Thread();
     /** 目标转换字符串，最长支持 1024 个字符 */
     String text = "";
-
+    /** 匹配符号“*”，“#”，开头和结尾多余的逗号“,”，串中连续的两个逗号“,,” */
     final Pattern pattern = Pattern.compile("\\*|#|,,|^,|,$");
 
     public VoiceOutputUtils() {
     }
 
+    /**
+     * 在待输出语音字符串尾部添加新串。
+     */
     public void addText(String text) {
         if (text != null) {
             this.text += text;

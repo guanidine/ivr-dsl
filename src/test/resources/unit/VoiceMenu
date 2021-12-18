@@ -14,71 +14,73 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+/**
+ * IVR 主程序。调用 {@code main} 方法运行。
+ * <p>
+ * 由 IVR DSL Compiler 自动生成，运行 {@code Application} 以调用 Compiler 的接口。
+ *
+ * @author Guanidine Beryllium
+ * @see Application
+ */
 public class VoiceMenu implements ActionListener {
 
-
+    /** 初始化一个事件监听实例 */
     public static VoiceMenu instance;
 
+    /**
+     * 构造 trigger-event 树。
+     *
+     * @see priv.ivrdsl.model.IvrMap
+     */
     public static void initHashMap() {
-        EventBean Action_0 = new EventBean("Home", "China-Mobile", "0");
+        EventBean Action_0 = new EventBean("Home", "China-Mobile", "0", "欢迎致电申国移动");
         Action_0.setAction("", true);
-
-        Action_0.setAdditions("欢迎致电申国移动");
 
         GlobalVariableBean.event2TriggerMap.put("0", Action_0);
 
-        EventBean Action_01 = new EventBean("Action_01", "转接服务", "1");
+        EventBean Action_01 = new EventBean("Action_01", "转接服务", "1", "分号123");
         GlobalVariableBean.event2TriggerMap.put("01", Action_01);
         Action_01.setAction("call", true);
-        Action_01.setAdditions("分号123");
         Action_0.addChild(Action_01);
 
-        EventBean Action_02 = new EventBean("Action_02", "信息业务", "2");
+        EventBean Action_02 = new EventBean("Action_02", "信息业务", "2", "tbDataPlan");
         GlobalVariableBean.event2TriggerMap.put("02", Action_02);
         Action_02.setAction("info", true);
-        Action_02.setAdditions("tbDataPlan");
         Action_0.addChild(Action_02);
 
-        EventBean Action_00 = new EventBean("Action_00", "投诉", "0");
+        EventBean Action_00 = new EventBean("Action_00", "投诉", "0", "");
         GlobalVariableBean.event2TriggerMap.put("00", Action_00);
         Action_00.setAction("menu", false);
-        Action_00.setAdditions("");
         Action_0.addChild(Action_00);
 
-        EventBean Action_009 = new EventBean("Action_009", "返回上级菜单", "9");
+        EventBean Action_009 = new EventBean("Action_009", "返回上级菜单", "9", "");
         GlobalVariableBean.event2TriggerMap.put("009", Action_009);
         Action_009.setAction("back", false);
-        Action_009.setAdditions("");
         Action_00.addChild(Action_009);
 
-        EventBean Action_000 = new EventBean("Action_000", "投诉", "0");
+        EventBean Action_000 = new EventBean("Action_000", "投诉", "0", "");
         GlobalVariableBean.event2TriggerMap.put("000", Action_000);
         Action_000.setAction("menu", false);
-        Action_000.setAdditions("");
         Action_00.addChild(Action_000);
 
-        EventBean Action_0009 = new EventBean("Action_0009", "返回上级菜单", "9");
+        EventBean Action_0009 = new EventBean("Action_0009", "返回上级菜单", "9", "");
         GlobalVariableBean.event2TriggerMap.put("0009", Action_0009);
         Action_0009.setAction("back", false);
-        Action_0009.setAdditions("");
         Action_000.addChild(Action_0009);
 
-        EventBean Action_0000 = new EventBean("Action_0000", "结束通话", "0");
+        EventBean Action_0000 = new EventBean("Action_0000", "结束通话", "0", "");
         GlobalVariableBean.event2TriggerMap.put("0000", Action_0000);
         Action_0000.setAction("hangup", true);
-        Action_0000.setAdditions("");
         Action_000.addChild(Action_0000);
 
-        EventBean Action_00a = new EventBean("Action_00a", "测试星号按键", "*");
+        EventBean Action_00a = new EventBean("Action_00a", "测试星号按键", "*", "");
         GlobalVariableBean.event2TriggerMap.put("00*", Action_00a);
         Action_00a.setAction("call", true);
-        Action_00a.setAdditions("");
         Action_00.addChild(Action_00a);
 
-        EventBean Action_00b = new EventBean("Action_00b", "测试井号按键", "#");
+        EventBean Action_00b = new EventBean("Action_00b", "测试井号按键", "#", "");
         GlobalVariableBean.event2TriggerMap.put("00#", Action_00b);
         Action_00b.setAction("hangup", true);
-        Action_00b.setAdditions("");
         Action_00.addChild(Action_00b);
 
     }

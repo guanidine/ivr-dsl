@@ -1,6 +1,7 @@
 package priv.ivrdsl;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.internal.collections.Pair;
@@ -112,5 +113,13 @@ public class TestGeneratorUT {
         }
         List<String> expected = Files.readAllLines(Path.of("src/test/resources/unit/VoiceMenu"));
         Assert.assertEquals(result, expected);
+    }
+
+    @AfterClass
+    public void afterTests() {
+        File f = new File("src/test/resources/unit/VoiceMenu.java");
+        if (f.exists()) {
+            f.delete();
+        }
     }
 }

@@ -1,22 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
-<head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-    <link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/>
-    <link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/>
-    <title>Commands.java</title>
-    <link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/>
-    <script type="text/javascript" src="../jacoco-resources/prettify.js"></script>
-</head>
-<body onload="window['PR_TAB_WIDTH']=4;prettyPrint()">
-<div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html"
-                                                              class="el_session">Sessions</a></span><a
-        href="../index.html" class="el_report">TestUtils Coverage Results, TestGenerator Coverage Results, TestException
-    Coverage Results</a> &gt; <a href="index.source.html" class="el_package">priv.ivrdsl.model</a> &gt; <span
-        class="el_source">Commands.java</span></div>
-<h1>Commands.java</h1>
-<pre class="source lang-java linenums">package priv.ivrdsl.model;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Commands.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Unit Test Coverage Results</a> &gt; <a href="index.source.html" class="el_package">priv.ivrdsl.model</a> &gt; <span class="el_source">Commands.java</span></div><h1>Commands.java</h1><pre class="source lang-java linenums">package priv.ivrdsl.model;
 
 import com.beust.jcommander.*;
 
@@ -32,8 +14,9 @@ import java.util.List;
  * @see Parameters
  */
 <span class="nc" id="L16">public class Commands {</span>
+    /** 命令 add。 */
     @Parameters(separators = &quot;=&quot;, commandDescription = &quot;添加一个事件&quot;)
-<span class="nc" id="L18">    public static class CommandAdd {</span>
+<span class="fc" id="L19">    public static class CommandAdd {</span>
         @Parameter(description = &quot;触发该事件的按键&quot;, required = true,
                 validateWith = Validation.ValidTrigger.class)
         public String button;
@@ -42,120 +25,112 @@ import java.util.List;
         @Parameter(names = {&quot;-action&quot;}, description = &quot;事件触发时执行的动作&quot;, required = true,
                 validateWith = Validation.ValidAction.class)
         public String action;
-<span class="nc" id="L27">        @Parameter(names = &quot;-additions&quot;, description = &quot;部分动作所需的额外信息&quot;, variableArity = true)</span>
+<span class="fc" id="L28">        @Parameter(names = &quot;-additions&quot;, description = &quot;部分动作所需的补充信息&quot;, variableArity = true)</span>
         public List&lt;String&gt; additions = new ArrayList&lt;&gt;();
-<span class="nc" id="L29">        @Parameter(names = {&quot;-help&quot;, &quot;-h&quot;, &quot;?&quot;}, description = &quot;显示帮助&quot;, help = true, hidden = true)</span>
+<span class="fc" id="L30">        @Parameter(names = {&quot;-help&quot;, &quot;-h&quot;, &quot;?&quot;}, description = &quot;显示帮助&quot;, help = true, hidden = true)</span>
         public boolean help = false;
     }
 
+    /** 命令 config。 */
     @Parameters(separators = &quot;=&quot;, commandDescription = &quot;配置 API 和 JDBC&quot;)
-<span class="nc" id="L34">    public static class CommandConfig {</span>
-<span class="nc" id="L35">        @Parameter(names = {&quot;-appid&quot;}, description = &quot;语音合成 appid&quot;)</span>
+<span class="fc" id="L36">    public static class CommandConfig {</span>
+<span class="fc" id="L37">        @Parameter(names = {&quot;-appid&quot;}, description = &quot;语音合成 appid&quot;)</span>
         public String appId = null;
-<span class="nc"
-      id="L37">        @Parameter(names = {&quot;-apikey&quot;}, description = &quot;语音合成 apikey&quot;)</span>
+<span class="fc" id="L39">        @Parameter(names = {&quot;-apikey&quot;}, description = &quot;语音合成 apikey&quot;)</span>
         public String apiKey = null;
-<span class="nc"
-      id="L39">        @Parameter(names = {&quot;-secretkey&quot;}, description = &quot;语音合成 secretkey&quot;)</span>
+<span class="fc" id="L41">        @Parameter(names = {&quot;-secretkey&quot;}, description = &quot;语音合成 secretkey&quot;)</span>
         public String secretKey = null;
-<span class="nc" id="L41">        @Parameter(names = {&quot;-name&quot;, &quot;-table&quot;}, description = &quot;数据库连接 待查关系表名&quot;)</span>
+<span class="fc" id="L43">        @Parameter(names = {&quot;-name&quot;, &quot;-table&quot;}, description = &quot;数据库连接 待查关系表名&quot;)</span>
         public String table = null;
-<span class="nc" id="L43">        @Parameter(names = {&quot;-driver&quot;}, description = &quot;数据库驱动&quot;)</span>
+<span class="fc" id="L45">        @Parameter(names = {&quot;-driver&quot;}, description = &quot;数据库驱动&quot;)</span>
         public String driver = null;
-<span class="nc" id="L45">        @Parameter(names = {&quot;-url&quot;}, description = &quot;数据库 url&quot;)</span>
+<span class="fc" id="L47">        @Parameter(names = {&quot;-url&quot;}, description = &quot;数据库 url&quot;)</span>
         public String url = null;
-<span class="nc" id="L47">        @Parameter(names = {&quot;-user&quot;}, description = &quot;访问数据库的用户名&quot;)</span>
+<span class="fc" id="L49">        @Parameter(names = {&quot;-user&quot;}, description = &quot;访问数据库的用户名&quot;)</span>
         public String user = null;
-<span class="nc" id="L49">        @Parameter(names = {&quot;-passwd&quot;, &quot;-password&quot;}, description = &quot;访问数据库的密码&quot;)</span>
+<span class="fc" id="L51">        @Parameter(names = {&quot;-passwd&quot;, &quot;-password&quot;}, description = &quot;访问数据库的密码&quot;)</span>
         public String passwd = null;
-<span class="nc" id="L51">        @Parameter(names = {&quot;-help&quot;, &quot;-h&quot;, &quot;?&quot;}, description = &quot;显示帮助&quot;, help = true, hidden = true)</span>
+<span class="fc" id="L53">        @Parameter(names = {&quot;-help&quot;, &quot;-h&quot;, &quot;?&quot;}, description = &quot;显示帮助&quot;, help = true, hidden = true)</span>
         public boolean help = false;
 
-<span class="nc"
-      id="L54">        public final String apiConfig = &quot;src/main/resources/apikey.properties&quot;;</span>
-<span class="nc" id="L55">        public final String jdbcConfig = &quot;src/main/resources/jdbc.xml&quot;;</span>
+<span class="fc" id="L56">        public final String apiConfig = &quot;src/main/resources/apikey.properties&quot;;</span>
+<span class="fc" id="L57">        public final String jdbcConfig = &quot;src/main/resources/jdbc.xml&quot;;</span>
     }
 
+    /** 命令 export。 */
     @Parameters(separators = &quot;=&quot;, commandDescription = &quot;导出 IVR 项目代码及依赖&quot;)
-<span class="nc" id="L59">    public static class CommandExport {</span>
-<span class="nc" id="L60">        @Parameter(names = &quot;-path&quot;, description = &quot;项目导出路径&quot;)</span>
+<span class="fc" id="L62">    public static class CommandExport {</span>
+<span class="fc" id="L63">        @Parameter(description = &quot;项目导出路径&quot;)</span>
         public String exportPath = &quot;&quot;;
-<span class="nc" id="L62">        @Parameter(names = {&quot;-help&quot;, &quot;-h&quot;, &quot;?&quot;}, description = &quot;显示帮助&quot;, help = true, hidden = true)</span>
+<span class="fc" id="L65">        @Parameter(names = {&quot;-help&quot;, &quot;-h&quot;, &quot;?&quot;}, description = &quot;显示帮助&quot;, help = true, hidden = true)</span>
         public boolean help = false;
+        @Parameter(names = {&quot;-debug&quot;, &quot;--debug&quot;}, description = &quot;在项目中生成可调式的代码&quot;, hidden = true)
+        public boolean debug;
     }
 
+    /** 命令 init。 */
     @Parameters(separators = &quot;=&quot;, commandDescription = &quot;初始化一个 IVR 项目&quot;)
-<span class="nc" id="L67">    public static class CommandInit {</span>
-<span class="nc" id="L68">        @Parameter(names = {&quot;-title&quot;}, description = &quot;IVR 程序的标题&quot;)</span>
+<span class="fc" id="L73">    public static class CommandInit {</span>
+<span class="fc" id="L74">        @Parameter(names = {&quot;-title&quot;}, description = &quot;IVR 程序的标题&quot;)</span>
         public String title = &quot;Voice Menu&quot;;
-<span class="nc"
-      id="L70">        @Parameter(names = {&quot;-playback&quot;}, description = &quot;IVR 程序的欢迎语音&quot;)</span>
+<span class="fc" id="L76">        @Parameter(names = {&quot;-playback&quot;}, description = &quot;IVR 程序的欢迎语音&quot;)</span>
         public String playback = &quot;欢迎致电&quot; + title;
-<span class="nc" id="L72">        @Parameter(names = {&quot;-help&quot;, &quot;-h&quot;, &quot;?&quot;}, description = &quot;显示帮助&quot;, help = true, hidden = true)</span>
+<span class="fc" id="L78">        @Parameter(names = {&quot;-help&quot;, &quot;-h&quot;, &quot;?&quot;}, description = &quot;显示帮助&quot;, help = true, hidden = true)</span>
         public boolean help = false;
     }
 
+    /** 命令 remove。 */
     @Parameters(separators = &quot;=&quot;, commandDescription = &quot;删除一个事件&quot;)
-<span class="nc" id="L77">    public static class CommandRemove {</span>
+<span class="fc" id="L84">    public static class CommandRemove {</span>
         @Parameter(description = &quot;事件逻辑路径&quot;, required = true)
         public String path;
-<span class="nc" id="L80">        @Parameter(names = {&quot;-help&quot;, &quot;-h&quot;, &quot;?&quot;}, description = &quot;显示帮助&quot;, help = true, hidden = true)</span>
+<span class="fc" id="L87">        @Parameter(names = {&quot;-help&quot;, &quot;-h&quot;, &quot;?&quot;}, description = &quot;显示帮助&quot;, help = true, hidden = true)</span>
         public boolean help = false;
     }
 
+    /** 命令 status。 */
     @Parameters(commandDescription = &quot;查看当前 IVR 程序的逻辑树&quot;)
-<span class="nc" id="L85">    public static class CommandStatus {</span>
-<span class="nc" id="L86">        @Parameter(names = {&quot;-help&quot;, &quot;-h&quot;, &quot;?&quot;}, description = &quot;显示帮助&quot;, help = true, hidden = true)</span>
+<span class="fc" id="L93">    public static class CommandStatus {</span>
+<span class="fc" id="L94">        @Parameter(names = {&quot;-help&quot;, &quot;-h&quot;, &quot;?&quot;}, description = &quot;显示帮助&quot;, help = true, hidden = true)</span>
         public boolean help = false;
     }
 
-    @Parameters(commandDescription = &quot;在项目内部生成测试用的 IVR 代码&quot;)
-<span class="nc" id="L91">    public static class CommandTest {</span>
-<span class="nc" id="L92">        @Parameter(names = {&quot;-help&quot;, &quot;-h&quot;, &quot;?&quot;}, description = &quot;显示帮助&quot;, help = true, hidden = true)</span>
-        public boolean help = false;
-    }
-
+    /** 命令 help。 */
     @Parameters(commandDescription = &quot;显示帮助&quot;)
-<span class="nc" id="L97">    public static class CommandHelp {</span>
-<span class="nc" id="L98">        @Parameter(names = {&quot;-help&quot;, &quot;-h&quot;, &quot;?&quot;}, description = &quot;显示帮助&quot;, help = true, hidden = true)</span>
+<span class="fc" id="L100">    public static class CommandHelp {</span>
+<span class="fc" id="L101">        @Parameter(names = {&quot;-help&quot;, &quot;-h&quot;, &quot;?&quot;}, description = &quot;显示帮助&quot;, help = true, hidden = true)</span>
         public boolean help = false;
     }
 
-    /**
-     * 参数合法性检验。
-     */
-<span class="nc" id="L105">    public static class Validation {</span>
+    /** 参数合法性检验。 */
+<span class="nc" id="L106">    public static class Validation {</span>
         /**
          * {@code add} 命令的参数 {@code -action} 需要在枚举 {@code Action} 可接受的范围内。
          */
-<span class="nc" id="L109">        static public class ValidAction implements IParameterValidator {</span>
+<span class="fc" id="L110">        static public class ValidAction implements IParameterValidator {</span>
             @Override
             public void validate(String name, String value) throws ParameterException {
-<span class="nc" id="L112">                EnumBean.Action action = EnumBean.Action.getByCode(value);</span>
-<span class="nc bnc" id="L113" title="All 2 branches missed.">                if (action == null) {</span>
-<span class="nc" id="L114">                    throw new ParameterException(&quot;Action should be among \&quot;Back\&quot;, \&quot;Call\&quot;, \&quot;Info\&quot;, &quot; +</span>
+<span class="fc" id="L113">                EnumBean.Action action = EnumBean.Action.getByCode(value);</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">                if (action == null) {</span>
+<span class="fc" id="L115">                    throw new ParameterException(&quot;Action should be among \&quot;Back\&quot;, \&quot;Call\&quot;, \&quot;Info\&quot;, &quot; +</span>
                             &quot;\&quot;Hangup\&quot;, \&quot;Menu\&quot;, \&quot;Record\&quot; and \&quot;Replay\&quot; (found &quot; + value + &quot;)&quot;);
                 }
-<span class="nc" id="L117">            }</span>
+<span class="fc" id="L118">            }</span>
         }
 
         /**
          * {@code add} 命令的参数 {@code -trigger} 需要在枚举 {@code Button} 可接受的范围内。
          */
-<span class="nc" id="L123">        static public class ValidTrigger implements IParameterValidator {</span>
+<span class="fc" id="L124">        static public class ValidTrigger implements IParameterValidator {</span>
             @Override
             public void validate(String name, String value) throws ParameterException {
-<span class="nc" id="L126">                EnumBean.Button button = EnumBean.Button.getByCode(value);</span>
-<span class="nc bnc" id="L127" title="All 2 branches missed.">                if (button == null) {</span>
-<span class="nc" id="L128">                    throw new ParameterException(&quot;Trigger Button should be among \&quot;0\&quot;, \&quot;1\&quot;, \&quot;2\&quot;, \&quot;3\&quot;, \&quot;4\&quot;, &quot; +</span>
+<span class="fc" id="L127">                EnumBean.Button button = EnumBean.Button.getByCode(value);</span>
+<span class="fc bfc" id="L128" title="All 2 branches covered.">                if (button == null) {</span>
+<span class="fc" id="L129">                    throw new ParameterException(&quot;Trigger Button should be among \&quot;0\&quot;, \&quot;1\&quot;, \&quot;2\&quot;, \&quot;3\&quot;, \&quot;4\&quot;, &quot; +</span>
                             &quot;\&quot;5\&quot;, \&quot;6\&quot;, \&quot;7\&quot;, \&quot;8\&quot;, \&quot;9\&quot;, \&quot;*\&quot;, \&quot;#\&quot;, (found &quot; + value + &quot;)&quot;);
                 }
-<span class="nc" id="L131">            }</span>
+<span class="fc" id="L132">            }</span>
         }
     }
 }
-</pre>
-<div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>
-</div>
-</body>
-</html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

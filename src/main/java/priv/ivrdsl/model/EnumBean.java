@@ -42,12 +42,13 @@ public class EnumBean {
             this.code = code;
         }
 
+        /**
+         * 获取枚举对应按键
+         *
+         * @return 按键字符串
+         */
         public String getCode() {
             return code;
-        }
-
-        public String getName() {
-            return name();
         }
 
         /**
@@ -96,16 +97,21 @@ public class EnumBean {
             this.code = code;
         }
 
+        /**
+         * 获取枚举对应动作
+         *
+         * @return 动作字符串
+         */
         public String getCode() {
             return code;
         }
 
         /**
-         * 查找按键 {@code code} 对应的枚举值，不区分大小写。
+         * 查找动作 {@code code} 对应的枚举值，不区分大小写。
          * <p>
          * 如果找不到对应枚举值则返回 {@code null}。
          *
-         * @param code 按键值
+         * @param code 动作字符串
          * @return 对应枚举值，不存在则返回 {@code null}
          */
         public static Action getByCode(String code) {
@@ -144,6 +150,11 @@ public class EnumBean {
             this.code = code;
         }
 
+        /**
+         * 获取枚举对应命令
+         *
+         * @return 命令字符串
+         */
         public String getCode() {
             return code;
         }

@@ -17,6 +17,8 @@ public interface ResultSetCaller {
      * 回调接口。
      *
      * @param rs - SQL 查询结果
+     * @see DataAccessor#data2String
+     * @see SqlQueryUtils#query
      */
     void callBack(ResultSet rs);
 }

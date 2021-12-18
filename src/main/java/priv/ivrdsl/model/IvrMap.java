@@ -9,18 +9,20 @@ import java.util.*;
  * <p>
  * 对于这个逻辑树，我们令根节点的绝对路径为“0”。用户通过按键到达一个事件节点，则这个事件节点相对根节点的路径就是用户按键的顺序。因此可以将每一个事件节点的绝对路径表示为 {@code "0" + 用户到达该节点的按键顺序}。
  * <p>
- * {@code IvrMap} 中有一个 Map{@literal <}String, List{@literal <}String{@literal >>} 类型的 {@code HashMap}，用以记录每一个事件节点绝对路径和事件信息（包括事件 {@code event}，动作 {@code action} 和额外信息 {@code additions}）的映射关系（trigger-event映射），以此表示 IVR 脚本的业务逻辑。
+ * {@code IvrMap} 中有一个 Map{@literal <}String, List{@literal <}String{@literal >>} 类型的 {@code HashMap}
+ * ，用以记录每一个事件节点绝对路径和事件信息（包括事件 {@code event}，动作 {@code action} 和补充信息 {@code additions}）的映射关系（trigger-event映射），以此表示 IVR
+ * 脚本的业务逻辑。
  *
  * @author Guanidine Beryllium
  */
 public class IvrMap implements Comparator<Map.Entry<String, List<String>>> {
-    static volatile IvrMap schema;
+    private static volatile IvrMap schema;
 
     private IvrMap() {
         map = new HashMap<>();
     }
 
-    Map<String, List<String>> map;
+    private final Map<String, List<String>> map;
 
     private static final HashMap<Character, Integer> ORDER_MAP = new HashMap<>() {
         {
@@ -55,6 +57,11 @@ public class IvrMap implements Comparator<Map.Entry<String, List<String>>> {
         return schema;
     }
 
+    /**
+     * 获取有序的 trigger-event 映射
+     *
+     * @return trigger -event 映射表
+     */
     public Map<String, List<String>> getMap() {
         return map;
     }
@@ -65,7 +72,7 @@ public class IvrMap implements Comparator<Map.Entry<String, List<String>>> {
      * @param path      事件节点的绝对路径
      * @param event     事件
      * @param action    事件触发动作
-     * @param additions 可能用到的额外信息
+     * @param additions 可能用到的补充信息
      */
     public void put(String path, String event, String action, String additions) {
         map.put(path, new ArrayList<>() {{

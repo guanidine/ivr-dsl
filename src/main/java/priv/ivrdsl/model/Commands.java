@@ -14,6 +14,7 @@ import java.util.List;
  * @see Parameters
  */
 public class Commands {
+    /** 命令 add。 */
     @Parameters(separators = "=", commandDescription = "添加一个事件")
     public static class CommandAdd {
         @Parameter(description = "触发该事件的按键", required = true,
@@ -24,12 +25,13 @@ public class Commands {
         @Parameter(names = {"-action"}, description = "事件触发时执行的动作", required = true,
                 validateWith = Validation.ValidAction.class)
         public String action;
-        @Parameter(names = "-additions", description = "部分动作所需的额外信息", variableArity = true)
+        @Parameter(names = "-additions", description = "部分动作所需的补充信息", variableArity = true)
         public List<String> additions = new ArrayList<>();
         @Parameter(names = {"-help", "-h", "?"}, description = "显示帮助", help = true, hidden = true)
         public boolean help = false;
     }
 
+    /** 命令 config。 */
     @Parameters(separators = "=", commandDescription = "配置 API 和 JDBC")
     public static class CommandConfig {
         @Parameter(names = {"-appid"}, description = "语音合成 appid")
@@ -55,6 +57,7 @@ public class Commands {
         public final String jdbcConfig = "src/main/resources/jdbc.xml";
     }
 
+    /** 命令 export。 */
     @Parameters(separators = "=", commandDescription = "导出 IVR 项目代码及依赖")
     public static class CommandExport {
         @Parameter(description = "项目导出路径")
@@ -65,6 +68,7 @@ public class Commands {
         public boolean debug;
     }
 
+    /** 命令 init。 */
     @Parameters(separators = "=", commandDescription = "初始化一个 IVR 项目")
     public static class CommandInit {
         @Parameter(names = {"-title"}, description = "IVR 程序的标题")
@@ -75,6 +79,7 @@ public class Commands {
         public boolean help = false;
     }
 
+    /** 命令 remove。 */
     @Parameters(separators = "=", commandDescription = "删除一个事件")
     public static class CommandRemove {
         @Parameter(description = "事件逻辑路径", required = true)
@@ -83,21 +88,21 @@ public class Commands {
         public boolean help = false;
     }
 
+    /** 命令 status。 */
     @Parameters(commandDescription = "查看当前 IVR 程序的逻辑树")
     public static class CommandStatus {
         @Parameter(names = {"-help", "-h", "?"}, description = "显示帮助", help = true, hidden = true)
         public boolean help = false;
     }
 
+    /** 命令 help。 */
     @Parameters(commandDescription = "显示帮助")
     public static class CommandHelp {
         @Parameter(names = {"-help", "-h", "?"}, description = "显示帮助", help = true, hidden = true)
         public boolean help = false;
     }
 
-    /**
-     * 参数合法性检验。
-     */
+    /** 参数合法性检验。 */
     public static class Validation {
         /**
          * {@code add} 命令的参数 {@code -action} 需要在枚举 {@code Action} 可接受的范围内。

@@ -20,7 +20,9 @@ import static priv.ivrdsl.util.StringProcessUtils.splitString;
  */
 public class IvrParser {
     private static volatile IvrParser IVRParser;
+    /** 解析结果输出 */
     private final IvrMap schema;
+    /** init 仅允许出现一次，且必须在开头 */
     private static boolean hasInit = false;
 
     private IvrParser() {
