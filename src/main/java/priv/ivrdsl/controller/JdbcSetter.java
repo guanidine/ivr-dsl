@@ -33,7 +33,7 @@ public class JdbcSetter {
             } else {
                 XmlOperator.add(jdbc, jdbcConfig);
             }
-            log.info(" Success : {} {{}, {}, {}, {}}", table, driver, url, user, passwd);
+            log.info(" Success : {}", jdbc);
             return null;
         } else {
             return missingParamsError(table, driver, url, user, passwd);

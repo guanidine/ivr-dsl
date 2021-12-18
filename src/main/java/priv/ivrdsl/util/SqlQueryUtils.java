@@ -1,8 +1,8 @@
 package priv.ivrdsl.util;
 
 import lombok.extern.slf4j.Slf4j;
+import priv.ivrdsl.exception.MissingPropsException;
 import priv.ivrdsl.model.JdbcBean;
-import priv.ivrdsl.exception.DatabasePropsExceptions;
 import priv.ivrdsl.impl.QueryCaseImpl;
 import priv.ivrdsl.impl.ResultSetCaller;
 
@@ -30,7 +30,7 @@ public class SqlQueryUtils {
     public static void query(String table, ResultSetCaller caller, QueryCaseImpl queryCase) {
         JdbcBean jdbc = find(table);
         if (jdbc == null) {
-            throw new DatabasePropsExceptions("ERROR: Fail to find configurations for table \"" + table + "\"");
+            throw new MissingPropsException("ERROR: Fail to find configurations for table \"" + table + "\"");
         }
 
         Connection conn = null;

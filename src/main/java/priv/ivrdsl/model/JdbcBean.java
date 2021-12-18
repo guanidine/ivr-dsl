@@ -1,6 +1,8 @@
 package priv.ivrdsl.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 
 /**
  * JDBC配置。
@@ -8,18 +10,12 @@ import lombok.Getter;
  * @author Guanidine Beryllium
  */
 @Getter
+@ToString
+@AllArgsConstructor
 public class JdbcBean {
     String name;
     String driver;
     String url;
     String user;
     String passwd;
-
-    public JdbcBean(String name, String driver, String url, String user, String passwd) {
-        this.name = name;
-        this.driver = driver;
-        this.url = url;
-        this.user = user;
-        this.passwd = passwd;
-    }
 }

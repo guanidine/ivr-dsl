@@ -134,8 +134,6 @@ public class EnumBean {
         COMMAND_STATUS("status"),
         /** 导出 */
         COMMAND_EXPORT("export"),
-        /** 测试 */
-        COMMAND_TEST("test"),
         /** 帮助 */
         COMMAND_HELP("help");
 

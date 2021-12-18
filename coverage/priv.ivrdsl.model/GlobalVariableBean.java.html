@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/>
+    <link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/>
+    <title>GlobalVariableBean.java</title>
+    <link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/>
+    <script type="text/javascript" src="../jacoco-resources/prettify.js"></script>
+</head>
+<body onload="window['PR_TAB_WIDTH']=4;prettyPrint()">
+<div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html"
+                                                              class="el_session">Sessions</a></span><a
+        href="../index.html" class="el_report">TestUtils Coverage Results, TestGenerator Coverage Results, TestException
+    Coverage Results</a> &gt; <a href="index.source.html" class="el_package">priv.ivrdsl.model</a> &gt; <span
+        class="el_source">GlobalVariableBean.java</span></div>
+<h1>GlobalVariableBean.java</h1>
+<pre class="source lang-java linenums">package priv.ivrdsl.model;
+
+import priv.ivrdsl.util.VoiceOutputUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+/**
+ * 全局变量。
+ * &lt;p&gt;
+ * 每个生成的 IVR 项目都有且仅有一个全局共享的 {@code GlobalVariableBean} 类，随程序运行即得到创建，以得到对这些贯穿程序始终的变量的便捷访问。
+ *
+ * @author Guanidine Beryllium
+ */
+<span class="nc" id="L16">public class GlobalVariableBean {</span>
+    /** 当前按键路径 */
+<span class="fc" id="L18">    public static String curTriggerPath = &quot;0&quot;;</span>
+    /** 可选按键集合 */
+<span class="fc" id="L20">    public static List&lt;String&gt; possibleOptionList = new ArrayList&lt;&gt;();</span>
+    /** 事件对象名与按键路径的映射表 */
+<span class="fc"
+      id="L22">    public static HashMap&lt;String, EventBean&gt; event2TriggerMap = new HashMap&lt;&gt;();</span>
+    /** 事件对象名与语音输出名称的映射表 */
+<span class="fc"
+      id="L24">    public static HashMap&lt;String, String&gt; event2VoiceTextMap = new HashMap&lt;&gt;();</span>
+    /** IVR 语音输出 */
+<span class="fc" id="L26">    public static VoiceOutputUtils voiceOutput = new VoiceOutputUtils();</span>
+    /** IVR 程序开始记号 */
+<span class="fc" id="L28">    public static Boolean hasStarted = false;</span>
+    /** IVR 程序终止记号 */
+<span class="fc" id="L30">    public static Boolean hasFinished = false;</span>
+}
+</pre>
+<div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>
+</div>
+</body>
+</html>

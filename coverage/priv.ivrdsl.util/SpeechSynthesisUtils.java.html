@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/>
+    <link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/>
+    <title>SpeechSynthesisUtils.java</title>
+    <link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/>
+    <script type="text/javascript" src="../jacoco-resources/prettify.js"></script>
+</head>
+<body onload="window['PR_TAB_WIDTH']=4;prettyPrint()">
+<div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html"
+                                                              class="el_session">Sessions</a></span><a
+        href="../index.html" class="el_report">TestUtils Coverage Results, TestGenerator Coverage Results, TestException
+    Coverage Results</a> &gt; <a href="index.source.html" class="el_package">priv.ivrdsl.util</a> &gt; <span
+        class="el_source">SpeechSynthesisUtils.java</span></div>
+<h1>SpeechSynthesisUtils.java</h1>
+<pre class="source lang-java linenums">package priv.ivrdsl.util;
+
+import com.baidu.aip.speech.AipSpeech;
+import com.baidu.aip.speech.TtsResponse;
+import com.baidu.aip.util.Util;
+import javazoom.jl.player.Player;
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.*;
+import java.util.Properties;
+
+/**
+ * 百度语音API接口。
+ *
+ * @author Guanidine Beryllium
+ */
+<span class="nc" id="L17">@Slf4j</span>
+<span class="nc" id="L18">public class SpeechSynthesisUtils {</span>
+    /** 百度语音识别的 Java 客户端 */
+    private static volatile AipSpeech client;
+
+    /**
+     * 单例模式实例化。读取 API 配置时使用反射访问，因此可以在打包成 jar 包后在其他项目中正确运行。
+     *
+     * @return 返回实例化后的 {@code AipSpeech} 类
+     */
+    private static AipSpeech getInstance() throws IOException {
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        if (client == null) {</span>
+<span class="nc" id="L29">            synchronized (AipSpeech.class) {</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">                if (client == null) {</span>
+<span class="nc" id="L31">                    Properties props = new Properties();</span>
+<span class="nc" id="L32">                    InputStream is = SpeechSynthesisUtils.class</span>
+<span class="nc" id="L33">                            .getClassLoader()</span>
+<span class="nc" id="L34">                            .getResourceAsStream(&quot;apikey.properties&quot;);</span>
+<span class="nc" id="L35">                    props.load(is);</span>
+<span class="nc" id="L36">                    client = new AipSpeech(</span>
+<span class="nc" id="L37">                            props.getProperty(&quot;app_id&quot;),</span>
+<span class="nc" id="L38">                            props.getProperty(&quot;api_key&quot;),</span>
+<span class="nc" id="L39">                            props.getProperty(&quot;secret_key&quot;)</span>
+                    );
+                }
+<span class="nc" id="L42">            }</span>
+        }
+<span class="nc" id="L44">        return client;</span>
+    }
+
+    /**
+     * 语音合成并以 mp3 格式输出。
+     *
+     * @param text       文字内容
+     * @param outputPath 合成语音生成路径
+     * @throws IOException 文件打开失败
+     * @see AipSpeech
+     */
+    private static void speechSynthesizer(String text, String outputPath) throws IOException {
+<span class="nc" id="L56">        int maxLength = 1024;</span>
+<span class="nc bnc" id="L57"
+      title="All 2 branches missed.">        if (text.getBytes().length &gt;= maxLength) {</span>
+<span class="nc" id="L58">            return;</span>
+        }
+<span class="nc" id="L60">        client = getInstance();</span>
+
+<span class="nc" id="L62">        client.setConnectionTimeoutInMillis(2000);</span>
+<span class="nc" id="L63">        client.setSocketTimeoutInMillis(60000);</span>
+
+<span class="nc" id="L65">        TtsResponse res = client.synthesis(text, &quot;zh&quot;, 1, null);</span>
+<span class="nc" id="L66">        byte[] data = res.getData();</span>
+<span class="nc" id="L67">        org.json.JSONObject res1 = res.getResult();</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        if (data != null) {</span>
+            try {
+<span class="nc" id="L70">                Util.writeBytesToFileSystem(data, outputPath);</span>
+<span class="nc" id="L71">            } catch (IOException e) {</span>
+<span class="nc" id="L72">                e.printStackTrace();</span>
+<span class="nc" id="L73">            }</span>
+<span class="nc" id="L74">            return;</span>
+        }
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        if (res1 != null) {</span>
+<span class="nc" id="L77">            log.info(&quot; Result : {}&quot;, res1);</span>
+        }
+<span class="nc" id="L79">    }</span>
+
+    /**
+     * 将文字合成为 mp3 格式的音频并播放。
+     *
+     * @param text 待转换文字内容
+     */
+    public static void mp3AudioPlay(String text) {
+<span class="nc" id="L87">        String outputPath = &quot;SpeechSynthesizer.mp3&quot;;</span>
+        try {
+<span class="nc" id="L89">            File file = new File(outputPath);</span>
+<span class="nc" id="L90">            speechSynthesizer(text, outputPath);</span>
+<span class="nc" id="L91">            FileInputStream fileInputStream = new FileInputStream(file);</span>
+<span class="nc" id="L92">            BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);</span>
+<span class="nc" id="L93">            Player jlPlayer = new Player(bufferedInputStream);</span>
+<span class="nc" id="L94">            jlPlayer.play();</span>
+<span class="nc" id="L95">        } catch (Exception e) {</span>
+<span class="nc" id="L96">            log.error(&quot; ERROR : Problem playing mp3 file {}&quot;, outputPath);</span>
+<span class="nc" id="L97">            log.error(&quot; ERROR : {}&quot;, e.getMessage());</span>
+<span class="nc" id="L98">        }</span>
+<span class="nc" id="L99">    }</span>
+
+}
+
+</pre>
+<div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>
+</div>
+</body>
+</html>

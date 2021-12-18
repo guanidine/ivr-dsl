@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/>
+    <link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/>
+    <title>EventLogic.java</title>
+    <link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/>
+    <script type="text/javascript" src="../jacoco-resources/prettify.js"></script>
+</head>
+<body onload="window['PR_TAB_WIDTH']=4;prettyPrint()">
+<div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html"
+                                                              class="el_session">Sessions</a></span><a
+        href="../index.html" class="el_report">TestUtils Coverage Results, TestGenerator Coverage Results, TestException
+    Coverage Results</a> &gt; <a href="index.source.html" class="el_package">priv.ivrdsl.service</a> &gt; <span
+        class="el_source">EventLogic.java</span></div>
+<h1>EventLogic.java</h1>
+<pre class="source lang-java linenums">package priv.ivrdsl.service;
+
+import org.dom4j.DocumentException;
+import priv.ivrdsl.model.EnumBean.Action;
+import priv.ivrdsl.model.GlobalVariableBean;
+import priv.ivrdsl.model.EventBean;
+import priv.ivrdsl.impl.QueryCaseImpl;
+import priv.ivrdsl.view.Style;
+
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.HashMap;
+
+import static priv.ivrdsl.controller.DataAccessor.data2String;
+
+/**
+ * 处理事件运行逻辑。
+ *
+ * @author Guanidine Beryllium
+ */
+<span class="nc" id="L21">public class EventLogic {</span>
+    /**
+     * 处理不同动作的运行逻辑。
+     *
+     * @param event 用户点击图形界面的事件
+     * @throws IOException          音频文件读写失败
+     * @throws InterruptedException 线程中断失败
+     * @throws DocumentException    xml 配置文件读取失败
+     */
+    public static void runLogic(ActionEvent event, QueryCaseImpl queryCase) throws IOException, InterruptedException, DocumentException {
+<span class="nc" id="L31">        detectError(event);</span>
+<span class="nc" id="L32">        EventBean currentEvent = GlobalVariableBean.event2TriggerMap.get(GlobalVariableBean.curTriggerPath);</span>
+<span class="nc" id="L33">        Style.setTextToScreen(currentEvent.getAction().getCode());</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        if (currentEvent.getAction() != Action.ACTION_MENU) {</span>
+<span class="nc bnc" id="L35" title="All 8 branches missed.">            switch (currentEvent.getAction()) {</span>
+<span class="nc" id="L36">                case ACTION_BACK -&gt; GlobalVariableBean.curTriggerPath =</span>
+<span class="nc" id="L37">                        GlobalVariableBean.curTriggerPath.substring(0, GlobalVariableBean.curTriggerPath.length() - 2);</span>
+<span class="nc" id="L38">                case ACTION_CALL -&gt; {</span>
+<span class="nc" id="L39">                    GlobalVariableBean.voiceOutput.addText(&quot;正在为您转接&quot; + currentEvent.getAdditions());</span>
+<span class="nc" id="L40">                    Style.setTextToScreen(&quot;Direct Call&quot;);</span>
+                }
+<span class="nc" id="L42">                case ACTION_INFO -&gt; {</span>
+<span class="nc" id="L43">                    GlobalVariableBean.voiceOutput.addText(data2String(currentEvent.getAdditions(), queryCase));</span>
+<span class="nc" id="L44">                    Style.setTextToScreen(&quot;Getting Information&quot;);</span>
+                }
+<span class="nc" id="L46">                case ACTION_HANGUP -&gt; {</span>
+<span class="nc" id="L47">                    GlobalVariableBean.voiceOutput.addText(&quot;再见&quot;);</span>
+<span class="nc" id="L48">                    Style.setTextToScreen(&quot;End of Call&quot;);</span>
+                }
+<span class="nc" id="L50">                case ACTION_MANUAL -&gt; {</span>
+<span class="nc" id="L51">                    GlobalVariableBean.voiceOutput.addText(&quot;正在为您转接人工服务&quot;);</span>
+<span class="nc" id="L52">                    Style.setTextToScreen(&quot;Manual Service&quot;);</span>
+                }
+<span class="nc" id="L54">                case ACTION_RECORD -&gt; {</span>
+<span class="nc" id="L55">                    Style.setTextToScreen(&quot;Recording&quot;);</span>
+<span class="nc" id="L56">                    Thread.sleep(3000);</span>
+<span class="nc" id="L57">                    GlobalVariableBean.voiceOutput.addText(&quot;已为您完成录音，再见&quot;);</span>
+                }
+<span class="nc" id="L59">                case ACTION_REPLAY -&gt; GlobalVariableBean.curTriggerPath =</span>
+<span class="nc" id="L60">                        GlobalVariableBean.curTriggerPath.substring(0, GlobalVariableBean.curTriggerPath.length() - 1);</span>
+            }
+        }
+<span class="nc" id="L63">        finishAction(currentEvent);</span>
+<span class="nc" id="L64">    }</span>
+
+    /**
+     * 初始化事件树。将当前事件 {@code currentEvent} 设为根节点“0”。
+     */
+    public static void runInitSetup() {
+<span class="nc"
+      id="L70">        EventBean currentEvent = GlobalVariableBean.event2TriggerMap.get(&quot;0&quot;);</span>
+<span class="nc bnc" id="L71"
+      title="All 2 branches missed.">        for (EventBean item : currentEvent.getChilds()) {</span>
+<span class="nc" id="L72">            GlobalVariableBean.possibleOptionList.add(item.getTrigger());</span>
+<span class="nc" id="L73">        }</span>
+<span class="nc" id="L74">    }</span>
+
+    /**
+     * 预处理。判断按键是否可选。
+     *
+     * @param event 用户点击图形界面的事件
+     */
+    private static void detectError(ActionEvent event) {
+<span class="nc" id="L82">        String character = event.getActionCommand();</span>
+<span class="nc" id="L83">        HashMap&lt;String, String&gt; charMap = new HashMap&lt;&gt;(12) {{</span>
+<span class="nc" id="L84">            put(&quot;0&quot;, &quot;按键0&quot;);</span>
+<span class="nc" id="L85">            put(&quot;1&quot;, &quot;按键1&quot;);</span>
+<span class="nc" id="L86">            put(&quot;2&quot;, &quot;按键2&quot;);</span>
+<span class="nc" id="L87">            put(&quot;3&quot;, &quot;按键3&quot;);</span>
+<span class="nc" id="L88">            put(&quot;4&quot;, &quot;按键4&quot;);</span>
+<span class="nc" id="L89">            put(&quot;5&quot;, &quot;按键5&quot;);</span>
+<span class="nc" id="L90">            put(&quot;6&quot;, &quot;按键6&quot;);</span>
+<span class="nc" id="L91">            put(&quot;7&quot;, &quot;按键7&quot;);</span>
+<span class="nc" id="L92">            put(&quot;8&quot;, &quot;按键8&quot;);</span>
+<span class="nc" id="L93">            put(&quot;9&quot;, &quot;按键9&quot;);</span>
+<span class="nc" id="L94">            put(&quot;*&quot;, &quot;星号键&quot;);</span>
+<span class="nc" id="L95">            put(&quot;#&quot;, &quot;井号键&quot;);</span>
+<span class="nc" id="L96">        }};</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        if (!GlobalVariableBean.possibleOptionList.contains(character)) {</span>
+<span class="nc" id="L98">            GlobalVariableBean.voiceOutput.addText(charMap.get(character) + &quot;不是一个可选的服务项，请重新按键&quot;);</span>
+        } else {
+<span class="nc" id="L100">            GlobalVariableBean.curTriggerPath = GlobalVariableBean.curTriggerPath + character;</span>
+        }
+<span class="nc" id="L102">    }</span>
+
+
+    /**
+     * 动作结束后的处理。
+     *
+     * @param currentEvent 当前事件
+     * @throws IOException 访问音频文件失败
+     */
+    private static void finishAction(EventBean currentEvent) throws IOException {
+<span class="nc" id="L112">        GlobalVariableBean.hasFinished = currentEvent.isFinal();</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">        if (GlobalVariableBean.hasFinished) {</span>
+<span class="nc" id="L114">            GlobalVariableBean.voiceOutput.speak();</span>
+<span class="nc" id="L115">            Style.setTextToScreen(&quot;PhoneCall finished&quot;);</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">        } else if (currentEvent.getAction() != Action.ACTION_MENU) {</span>
+<span class="nc" id="L117">            currentEvent = GlobalVariableBean.event2TriggerMap.get(GlobalVariableBean.curTriggerPath);</span>
+        }
+<span class="nc" id="L119">        GlobalVariableBean.possibleOptionList.clear();</span>
+<span class="nc" id="L120">        HashMap&lt;String, String&gt; charMap = new HashMap&lt;&gt;(12) {{</span>
+<span class="nc" id="L121">            put(&quot;0&quot;, &quot;0&quot;);</span>
+<span class="nc" id="L122">            put(&quot;1&quot;, &quot;1&quot;);</span>
+<span class="nc" id="L123">            put(&quot;2&quot;, &quot;2&quot;);</span>
+<span class="nc" id="L124">            put(&quot;3&quot;, &quot;3&quot;);</span>
+<span class="nc" id="L125">            put(&quot;4&quot;, &quot;4&quot;);</span>
+<span class="nc" id="L126">            put(&quot;5&quot;, &quot;5&quot;);</span>
+<span class="nc" id="L127">            put(&quot;6&quot;, &quot;6&quot;);</span>
+<span class="nc" id="L128">            put(&quot;7&quot;, &quot;7&quot;);</span>
+<span class="nc" id="L129">            put(&quot;8&quot;, &quot;8&quot;);</span>
+<span class="nc" id="L130">            put(&quot;9&quot;, &quot;9&quot;);</span>
+<span class="nc" id="L131">            put(&quot;*&quot;, &quot;星号键&quot;);</span>
+<span class="nc" id="L132">            put(&quot;#&quot;, &quot;井号键&quot;);</span>
+<span class="nc" id="L133">        }};</span>
+<span class="nc bnc" id="L134"
+      title="All 2 branches missed.">        for (EventBean child : currentEvent.getChilds()) {</span>
+<span class="nc" id="L135">            GlobalVariableBean.voiceOutput.addText(</span>
+<span class="nc" id="L136">                    &quot;, &quot; + child.getName() + &quot; 请按 &quot; + charMap.get(child.getTrigger()) + &quot; ,&quot;);</span>
+<span class="nc" id="L137">            GlobalVariableBean.possibleOptionList.add(child.getTrigger());</span>
+<span class="nc" id="L138">        }</span>
+<span class="nc" id="L139">        GlobalVariableBean.voiceOutput.speak();</span>
+<span class="nc" id="L140">    }</span>
+}
+</pre>
+<div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>
+</div>
+</body>
+</html>

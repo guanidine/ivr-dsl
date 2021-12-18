@@ -57,10 +57,12 @@ public class Commands {
 
     @Parameters(separators = "=", commandDescription = "导出 IVR 项目代码及依赖")
     public static class CommandExport {
-        @Parameter(names = "-path", description = "项目导出路径")
+        @Parameter(description = "项目导出路径")
         public String exportPath = "";
         @Parameter(names = {"-help", "-h", "?"}, description = "显示帮助", help = true, hidden = true)
         public boolean help = false;
+        @Parameter(names = {"-debug", "--debug"}, description = "在项目中生成可调式的代码", hidden = true)
+        public boolean debug;
     }
 
     @Parameters(separators = "=", commandDescription = "初始化一个 IVR 项目")
@@ -83,12 +85,6 @@ public class Commands {
 
     @Parameters(commandDescription = "查看当前 IVR 程序的逻辑树")
     public static class CommandStatus {
-        @Parameter(names = {"-help", "-h", "?"}, description = "显示帮助", help = true, hidden = true)
-        public boolean help = false;
-    }
-
-    @Parameters(commandDescription = "在项目内部生成测试用的 IVR 代码")
-    public static class CommandTest {
         @Parameter(names = {"-help", "-h", "?"}, description = "显示帮助", help = true, hidden = true)
         public boolean help = false;
     }

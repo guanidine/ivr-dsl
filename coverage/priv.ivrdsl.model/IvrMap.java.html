@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/>
+    <link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/>
+    <title>IvrMap.java</title>
+    <link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/>
+    <script type="text/javascript" src="../jacoco-resources/prettify.js"></script>
+</head>
+<body onload="window['PR_TAB_WIDTH']=4;prettyPrint()">
+<div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html"
+                                                              class="el_session">Sessions</a></span><a
+        href="../index.html" class="el_report">TestUtils Coverage Results, TestGenerator Coverage Results, TestException
+    Coverage Results</a> &gt; <a href="index.source.html" class="el_package">priv.ivrdsl.model</a> &gt; <span
+        class="el_source">IvrMap.java</span></div>
+<h1>IvrMap.java</h1>
+<pre class="source lang-java linenums">package priv.ivrdsl.model;
+
+import java.util.*;
+
+/**
+ * IVR 树状关系数据结构.
+ * &lt;p&gt;
+ * IVR 的业务逻辑呈现为树状，具体表现为以初始状态“0”为树的根节点，每一个 {@code event} 都是“0”的子节点。如果一个 {@code event} 的 {@code action} 是 {@link EnumBean.Action#ACTION_MENU}，则意味着在该事件节点下存在另一组子节点。它们组成了 IVR 业务的一个次级菜单，在客户按下 {@code ACTION_MENU} 对应的按键后进入。而如果 {@code action} 不是 {@code ACTION_MENU} ，那么这个 {@code event} 就已经成为了叶子结点。
+ * &lt;p&gt;
+ * 对于这个逻辑树，我们令根节点的绝对路径为“0”。用户通过按键到达一个事件节点，则这个事件节点相对根节点的路径就是用户按键的顺序。因此可以将每一个事件节点的绝对路径表示为 {@code &quot;0&quot; + 用户到达该节点的按键顺序}。
+ * &lt;p&gt;
+ * {@code IvrMap} 中有一个 Map{@literal &lt;}String, List{@literal &lt;}String{@literal &gt;&gt;} 类型的 {@code HashMap}，用以记录每一个事件节点绝对路径和事件信息（包括事件 {@code event}，动作 {@code action} 和额外信息 {@code additions}）的映射关系（trigger-event映射），以此表示 IVR 脚本的业务逻辑。
+ *
+ * @author Guanidine Beryllium
+ */
+public class IvrMap implements Comparator&lt;Map.Entry&lt;String, List&lt;String&gt;&gt;&gt; {
+    static volatile IvrMap schema;
+
+<span class="nc" id="L19">    private IvrMap() {</span>
+<span class="nc" id="L20">        map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L21">    }</span>
+
+    Map&lt;String, List&lt;String&gt;&gt; map;
+
+<span class="nc"
+      id="L25">    private static final HashMap&lt;Character, Integer&gt; ORDER_MAP = new HashMap&lt;&gt;() {</span>
+        {
+<span class="nc" id="L27">            put('1', 0);</span>
+<span class="nc" id="L28">            put('2', 1);</span>
+<span class="nc" id="L29">            put('3', 2);</span>
+<span class="nc" id="L30">            put('4', 3);</span>
+<span class="nc" id="L31">            put('5', 4);</span>
+<span class="nc" id="L32">            put('6', 5);</span>
+<span class="nc" id="L33">            put('7', 6);</span>
+<span class="nc" id="L34">            put('8', 7);</span>
+<span class="nc" id="L35">            put('9', 8);</span>
+<span class="nc" id="L36">            put('0', 9);</span>
+<span class="nc" id="L37">            put('*', 10);</span>
+<span class="nc" id="L38">            put('#', 11);</span>
+<span class="nc" id="L39">        }</span>
+    };
+
+    /**
+     * 单例模式获取一个 {@code SchemaUtil} 实例。
+     *
+     * @return {@code SchemaUtil} 实例
+     */
+    public static IvrMap getInstance() {
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        if (schema == null) {</span>
+<span class="nc" id="L49">            synchronized (IvrMap.class) {</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">                if (schema == null) {</span>
+<span class="nc" id="L51">                    schema = new IvrMap();</span>
+                }
+<span class="nc" id="L53">            }</span>
+        }
+<span class="nc" id="L55">        return schema;</span>
+    }
+
+    public Map&lt;String, List&lt;String&gt;&gt; getMap() {
+<span class="nc" id="L59">        return map;</span>
+    }
+
+    /**
+     * 添加一组 trigger-event 映射关系
+     *
+     * @param path      事件节点的绝对路径
+     * @param event     事件
+     * @param action    事件触发动作
+     * @param additions 可能用到的额外信息
+     */
+    public void put(String path, String event, String action, String additions) {
+<span class="nc" id="L71">        map.put(path, new ArrayList&lt;&gt;() {{</span>
+<span class="nc" id="L72">            add(event);</span>
+<span class="nc" id="L73">            add(action);</span>
+<span class="nc" id="L74">            add(additions);</span>
+<span class="nc" id="L75">        }});</span>
+<span class="nc" id="L76">    }</span>
+
+    /**
+     * 删除一组 trigger-event 映射关系
+     *
+     * @param path 事件节点的绝对路径
+     */
+    public void remove(String path) {
+<span class="nc" id="L84">        map.entrySet().removeIf(item -&gt; item.getKey().startsWith(path));</span>
+<span class="nc" id="L85">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L89">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc"
+      id="L90">        Set&lt;Map.Entry&lt;String, List&lt;String&gt;&gt;&gt; entrySet = map.entrySet();</span>
+<span class="nc" id="L91">        List&lt;Map.Entry&lt;String, List&lt;String&gt;&gt;&gt; list = new ArrayList&lt;&gt;(entrySet);</span>
+<span class="nc" id="L92">        list.sort(getInstance());</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        for (Map.Entry&lt;String, List&lt;String&gt;&gt; item : list) {</span>
+<span class="nc" id="L94">            String path = item.getKey();</span>
+<span class="nc" id="L95">            String value = item.getValue().toString();</span>
+<span class="nc" id="L96">            sb.append(&quot;\t&quot;.repeat(path.length() - 1));</span>
+<span class="nc"
+      id="L97">            sb.append(path).append(&quot; --&gt; &quot;).append(value).append(&quot;\n&quot;);</span>
+<span class="nc" id="L98">        }</span>
+<span class="nc" id="L99">        return sb.toString();</span>
+    }
+
+    @Override
+    public int compare(Map.Entry&lt;String, List&lt;String&gt;&gt; o1, Map.Entry&lt;String, List&lt;String&gt;&gt; o2) {
+<span class="nc" id="L104">        String s1 = o1.getKey();</span>
+<span class="nc" id="L105">        String s2 = o2.getKey();</span>
+<span class="nc" id="L106">        int len1 = s1.length();</span>
+<span class="nc" id="L107">        int len2 = s2.length();</span>
+<span class="nc bnc" id="L108" title="All 4 branches missed.">        for (int i = 0; i &lt; len1 &amp;&amp; i &lt; len2; i++) {</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">            if (!ORDER_MAP.get(s1.charAt(i)).equals(ORDER_MAP.get(s2.charAt(i)))) {</span>
+<span class="nc" id="L110">                return ORDER_MAP.get(s1.charAt(i)) - ORDER_MAP.get(s2.charAt(i));</span>
+            } else {
+<span class="nc bnc" id="L112"
+      title="All 4 branches missed.">                if (i == len1 - 1 || i == len2 - 1) {</span>
+<span class="nc" id="L113">                    return len1 - len2;</span>
+                }
+            }
+        }
+<span class="nc" id="L117">        return 0;</span>
+    }
+}
+</pre>
+<div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>
+</div>
+</body>
+</html>

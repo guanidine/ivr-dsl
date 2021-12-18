@@ -25,10 +25,12 @@ public class DataAccessor {
             try {
                 int columnCount = rs.getMetaData().getColumnCount();
                 if (rs.next()) {
-                    sb.append("尊敬的客户").append(rs.getString(1)).append("您好，您的");
+                    sb.append("尊敬的客户").append(rs.getString(1)).append("您好,您的");
                     for (int i = 2; i <= columnCount; i++) {
                         sb.append(rs.getMetaData().getColumnName(i)).append("为").append(rs.getString(i)).append(", ");
                     }
+                } else {
+                    sb.append("抱歉,没有查到您的信息");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

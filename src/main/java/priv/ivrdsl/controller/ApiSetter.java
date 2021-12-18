@@ -37,6 +37,6 @@ public class ApiSetter {
                 props.store(new FileOutputStream(file), "baidu api");
             }
         }
-        log.info(" Success : {{}, {}, {}}", appId, apiKey, secretKey);
+        log.info(" Success : ApiBean(app_id={}, api_key={}, secret_key={})", appId, apiKey, secretKey);
     }
 }

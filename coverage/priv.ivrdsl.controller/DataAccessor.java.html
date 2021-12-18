@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/>
+    <link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/>
+    <title>DataAccessor.java</title>
+    <link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/>
+    <script type="text/javascript" src="../jacoco-resources/prettify.js"></script>
+</head>
+<body onload="window['PR_TAB_WIDTH']=4;prettyPrint()">
+<div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html"
+                                                              class="el_session">Sessions</a></span><a
+        href="../index.html" class="el_report">TestUtils Coverage Results, TestGenerator Coverage Results, TestException
+    Coverage Results</a> &gt; <a href="index.source.html" class="el_package">priv.ivrdsl.controller</a> &gt; <span
+        class="el_source">DataAccessor.java</span></div>
+<h1>DataAccessor.java</h1>
+<pre class="source lang-java linenums">package priv.ivrdsl.controller;
+
+import priv.ivrdsl.impl.QueryCaseImpl;
+import priv.ivrdsl.impl.ResultSetCaller;
+import priv.ivrdsl.util.SqlQueryUtils;
+
+import java.sql.SQLException;
+
+/**
+ * 从数据库表中获取信息。
+ *
+ * @author Guanidine Beryllium
+ */
+<span class="nc" id="L14">public class DataAccessor {</span>
+    /**
+     * 根据重载过后的 {@code queryCase} 提供的条件，在指定 SQL 表中查询所需信息，并返回查询结果。
+     *
+     * @param table 查询目标关系表
+     * @return 处理后的查询结果
+     * @see QueryCaseImpl#queryCase()
+     */
+    public static String data2String(String table, QueryCaseImpl queryCase) {
+<span class="fc" id="L23">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L24">        ResultSetCaller caller = rs -&gt; {</span>
+            try {
+<span class="fc" id="L26">                int columnCount = rs.getMetaData().getColumnCount();</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">                if (rs.next()) {</span>
+<span class="fc" id="L28">                    sb.append(&quot;尊敬的客户&quot;).append(rs.getString(1)).append(&quot;您好,您的&quot;);</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">                    for (int i = 2; i &lt;= columnCount; i++) {</span>
+<span class="fc" id="L30">                        sb.append(rs.getMetaData().getColumnName(i)).append(&quot;为&quot;).append(rs.getString(i)).append(&quot;, &quot;);</span>
+                    }
+                } else {
+<span class="fc" id="L33">                    sb.append(&quot;抱歉,没有查到您的信息&quot;);</span>
+                }
+<span class="nc" id="L35">            } catch (SQLException e) {</span>
+<span class="nc" id="L36">                e.printStackTrace();</span>
+<span class="fc" id="L37">            }</span>
+<span class="fc" id="L38">        };</span>
+<span class="fc" id="L39">        SqlQueryUtils.query(table, caller, queryCase);</span>
+<span class="fc" id="L40">        return sb.toString();</span>
+    }
+}
+</pre>
+<div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>
+</div>
+</body>
+</html>

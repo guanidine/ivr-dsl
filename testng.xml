@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="D:/JetBrainsProjects/ivr-dsl/src/test/java/priv/ivrdsl">
+        <classes>
+            <class name="priv.ivrdsl.global.TestCompiler">
+                <methods>
+                    <include name="testFileExport"/>
+                </methods>
+            </class>
+            <class name="priv.ivrdsl.unit.TestControllerUT">
+                <methods>
+                    <include name="testJdbcSetter"/>
+                    <include name="testApiSetter"/>
+                </methods>
+            </class>
+            <class name="priv.ivrdsl.unit.TestExceptionUT">
+                <methods>
+                    <include name="testDatabasePropsException"/>
+                    <include name="testParameterException1"/>
+                    <include name="testParameterException2"/>
+                    <include name="testParameterException3"/>
+                    <include name="testSyntaxException1"/>
+                </methods>
+            </class>
+            <class name="priv.ivrdsl.unit.TestGeneratorUT">
+                <methods>
+                    <include name="testParseCommand"/>
+                    <include name="testCommandParser"/>
+                    <include name="testIvrMap"/>
+                    <include name="testExport"/>
+                </methods>
+            </class>
+            <class name="priv.ivrdsl.unit.TestUtilsUT">
+                <methods>
+                    <include name="testRemoveLastChar"/>
+                    <include name="testGetLastChar"/>
+                    <include name="testSplitString"/>
+                    <include name="testVoiceOutput"/>
+                    <include name="testSqlQuery"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Unit Test">
+        <groups>
+            <run>
+                <include name="ut"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="priv.ivrdsl.unit.TestControllerUT"/>
+            <class name="priv.ivrdsl.unit.TestExceptionUT"/>
+            <class name="priv.ivrdsl.unit.TestGeneratorUT"/>
+            <class name="priv.ivrdsl.unit.TestUtilsUT"/>
+        </classes>
+    </test>
+</suite>

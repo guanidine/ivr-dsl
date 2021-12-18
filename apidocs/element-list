@@ -1,0 +1,8 @@
+priv.ivrdsl
+priv.ivrdsl.controller
+priv.ivrdsl.exception
+priv.ivrdsl.impl
+priv.ivrdsl.model
+priv.ivrdsl.service
+priv.ivrdsl.util
+priv.ivrdsl.view

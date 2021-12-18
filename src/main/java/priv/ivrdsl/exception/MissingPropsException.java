@@ -5,8 +5,8 @@ package priv.ivrdsl.exception;
  *
  * @author Guanidine Beryllium
  */
-public class DatabasePropsException extends BaseException {
-    public DatabasePropsException(String message) {
+public class MissingPropsException extends BaseException {
+    public MissingPropsException(String message) {
         super(message);
     }
 }

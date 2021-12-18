@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/>
+    <link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/>
+    <title>StringProcessUtils.java</title>
+    <link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/>
+    <script type="text/javascript" src="../jacoco-resources/prettify.js"></script>
+</head>
+<body onload="window['PR_TAB_WIDTH']=4;prettyPrint()">
+<div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html"
+                                                              class="el_session">Sessions</a></span><a
+        href="../index.html" class="el_report">TestUtils Coverage Results, TestGenerator Coverage Results, TestException
+    Coverage Results</a> &gt; <a href="index.source.html" class="el_package">priv.ivrdsl.util</a> &gt; <span
+        class="el_source">StringProcessUtils.java</span></div>
+<h1>StringProcessUtils.java</h1>
+<pre class="source lang-java linenums">package priv.ivrdsl.util;
+
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * 字符串处理方法类。
+ *
+ * @author Guanidine Beryllium
+ */
+<span class="nc" id="L12">public class StringProcessUtils {</span>
+
+    /**
+     * 字符串分割。将字符串按 {@code &quot; &quot;} 分割，同时将引号内的字串视为一个完整的字符串，忽略其中的空格。
+     *
+     * @param text 待处理字符串
+     * @return 处理后的字符串数组
+     */
+    public static String[] splitString(String text) {
+<span class="fc" id="L21">        String regex = &quot;\&quot;([^\&quot;]*)\&quot;|(\\S+)&quot;;</span>
+<span class="fc" id="L22">        ArrayList&lt;String&gt; commandArray = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L23">        Matcher m = Pattern.compile(regex).matcher(text);</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        while (m.find()) {</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">            if (m.group(1) != null) {</span>
+<span class="fc" id="L26">                commandArray.add(m.group(1));</span>
+            } else {
+<span class="fc" id="L28">                commandArray.add(m.group(2));</span>
+            }
+        }
+<span class="fc" id="L31">        return commandArray.toArray(new String[0]);</span>
+    }
+
+    /**
+     * 去除字符串最后一位。
+     *
+     * @param text 待处理字符串
+     * @return 处理后的字符串。原串为 {@code null} 或 {@code &quot;&quot;} 则返回 {@code null}
+     */
+    public static String removeLastChar(String text) {
+<span class="fc bfc" id="L41" title="All 4 branches covered.">        if (text == null || text.length() &lt; 1) {</span>
+<span class="fc" id="L42">            return null;</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        } else if (text.length() == 1) {</span>
+<span class="fc" id="L44">            return &quot;&quot;;</span>
+        }
+<span class="fc" id="L46">        return text.substring(0, text.length() - 1);</span>
+    }
+
+    /**
+     * 取出字符串最后一位。
+     *
+     * @param text 待处理字符串
+     * @return 处理后字符串。原串为 {@code null} 或 {@code &quot;&quot;} 则返回 {@code null}
+     */
+    public static String getLastChar(String text) {
+<span class="fc bfc" id="L56" title="All 4 branches covered.">        if (text == null || text.length() &lt; 1) {</span>
+<span class="fc" id="L57">            return null;</span>
+        }
+<span class="fc" id="L59">        return text.substring(text.length() - 1);</span>
+    }
+}
+</pre>
+<div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>
+</div>
+</body>
+</html>

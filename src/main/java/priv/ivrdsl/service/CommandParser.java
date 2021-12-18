@@ -1,8 +1,8 @@
 package priv.ivrdsl.service;
 
 import com.beust.jcommander.JCommander;
+import com.beust.jcommander.ParameterException;
 import org.apache.commons.io.FileUtils;
-import priv.ivrdsl.exception.ParametersException;
 import priv.ivrdsl.exception.SyntaxErrorException;
 import priv.ivrdsl.model.Commands;
 import priv.ivrdsl.model.IvrMap;
@@ -28,7 +28,6 @@ public class CommandParser {
     Commands.CommandRemove remove;
     Commands.CommandStatus status;
     Commands.CommandExport export;
-    Commands.CommandTest test;
     Commands.CommandHelp help;
 
     private CommandParser() {
@@ -38,7 +37,6 @@ public class CommandParser {
         remove = new Commands.CommandRemove();
         status = new Commands.CommandStatus();
         export = new Commands.CommandExport();
-        test = new Commands.CommandTest();
         help = new Commands.CommandHelp();
     }
 
@@ -63,7 +61,6 @@ public class CommandParser {
                         .addCommand("remove", cm.remove)
                         .addCommand("status", cm.status)
                         .addCommand("export", cm.export)
-                        .addCommand("test", cm.test)
                         .addCommand("config", cm.config)
                         .addCommand("help", cm.help)
                         .build();
@@ -83,7 +80,7 @@ public class CommandParser {
                 if (cm.config.table != null || cm.config.driver != null || cm.config.url != null || cm.config.user != null || cm.config.passwd != null) {
                     String result = setJdbc(cm.config.table, cm.config.driver, cm.config.url, cm.config.user, cm.config.passwd, cm.config.jdbcConfig);
                     if (result != null) {
-                        throw new ParametersException("ERROR: In command \"config\", parameters \"table\", " +
+                        throw new ParameterException("ERROR: In command \"config\", parameters \"table\", " +
                                 "\"driver\", \"url\", \"user\" and \"passwd\" " + "are expected to appear in group, " +
                                 "missing " + result);
                     }
@@ -126,27 +123,28 @@ public class CommandParser {
                 if (cm.export.help) {
                     jc.usage();
                 }
-                String url = (cm.export.exportPath.length() == 0 || cm.export.exportPath.endsWith("/") || cm.export.exportPath.endsWith("\\")) ?
-                        cm.export.exportPath + "VoiceMenu" : cm.export.exportPath + "/VoiceMenu";
-                File dir = new File(url);
-                if (!dir.exists()) {
-                    if (!dir.mkdir()) {
-                        throw new IOException();
+                if (cm.export.debug) {
+                    String filepath = cm.export.exportPath;
+                    if (filepath.length() == 0) {
+                        filepath = "src/main/java/priv/ivrdsl/";
                     }
+                    String packagePath = "package priv.ivrdsl";
+                    Generator gen = new Generator(filepath, schema, packagePath);
+                    gen.generateIvr();
+                } else {
+                    String url = (cm.export.exportPath.length() == 0 || cm.export.exportPath.endsWith("/") || cm.export.exportPath.endsWith("\\")) ?
+                            cm.export.exportPath + "VoiceMenu" : cm.export.exportPath + "/VoiceMenu";
+                    File dir = new File(url);
+                    if (!dir.exists()) {
+                        if (!dir.mkdir()) {
+                            throw new IOException();
+                        }
+                    }
+                    FileUtils.copyFile(new File("target/ivrdsl-1.0-SNAPSHOT-jar-with-dependencies.jar"),
+                            new File(url + "/ivrdsl-1.0-SNAPSHOT-jar-with-dependencies.jar"));
+                    Generator gen = new Generator(url, schema);
+                    gen.generateIvr();
                 }
-                FileUtils.copyFile(new File("target/ivrdsl-1.0-SNAPSHOT-jar-with-dependencies.jar"),
-                        new File(url + "/ivrdsl-1.0-SNAPSHOT-jar-with-dependencies.jar"));
-                Generator gen = new Generator(url, schema);
-                gen.generateIvr();
-            }
-            case COMMAND_TEST -> {
-                if (cm.test.help) {
-                    jc.usage();
-                }
-                String filepath = "src/main/java/priv/ivrdsl/";
-                String packagePath = "package priv.ivrdsl";
-                Generator gen = new Generator(filepath, schema, packagePath);
-                gen.generateIvr();
             }
             case COMMAND_HELP -> {
                 jc.usage();

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/>
+    <link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/>
+    <title>EnumBean.java</title>
+    <link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/>
+    <script type="text/javascript" src="../jacoco-resources/prettify.js"></script>
+</head>
+<body onload="window['PR_TAB_WIDTH']=4;prettyPrint()">
+<div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html"
+                                                              class="el_session">Sessions</a></span><a
+        href="../index.html" class="el_report">TestUtils Coverage Results, TestGenerator Coverage Results, TestException
+    Coverage Results</a> &gt; <a href="index.source.html" class="el_package">priv.ivrdsl.model</a> &gt; <span
+        class="el_source">EnumBean.java</span></div>
+<h1>EnumBean.java</h1>
+<pre class="source lang-java linenums">package priv.ivrdsl.model;
+
+/**
+ * 枚举类。用于检测用户输入合法性，以及 {@code switch-case} 语句中。
+ *
+ * @author Guanidine Beryllium
+ */
+<span class="nc" id="L8">public class EnumBean {</span>
+    /**
+     * 可选按键。
+     */
+<span class="nc" id="L12">    public enum Button {</span>
+        /** 电话按键1 */
+<span class="nc" id="L14">        BUTTON_1(&quot;1&quot;),</span>
+        /** 电话按键2 */
+<span class="nc" id="L16">        BUTTON_2(&quot;2&quot;),</span>
+        /** 电话按键3 */
+<span class="nc" id="L18">        BUTTON_3(&quot;3&quot;),</span>
+        /** 电话按键4 */
+<span class="nc" id="L20">        BUTTON_4(&quot;4&quot;),</span>
+        /** 电话按键5 */
+<span class="nc" id="L22">        BUTTON_5(&quot;5&quot;),</span>
+        /** 电话按键6 */
+<span class="nc" id="L24">        BUTTON_6(&quot;6&quot;),</span>
+        /** 电话按键7 */
+<span class="nc" id="L26">        BUTTON_7(&quot;7&quot;),</span>
+        /** 电话按键8 */
+<span class="nc" id="L28">        BUTTON_8(&quot;8&quot;),</span>
+        /** 电话按键9 */
+<span class="nc" id="L30">        BUTTON_9(&quot;9&quot;),</span>
+        /** 电话按键* */
+<span class="nc" id="L32">        BUTTON_STAR(&quot;*&quot;),</span>
+        /** 电话按键0 */
+<span class="nc" id="L34">        BUTTON_0(&quot;0&quot;),</span>
+        /** 电话按键# */
+<span class="nc" id="L36">        BUTTON_HASH(&quot;#&quot;);</span>
+
+        /** 按键对应字符串值。 */
+        private final String code;
+
+<span class="nc" id="L41">        Button(String code) {</span>
+<span class="nc" id="L42">            this.code = code;</span>
+<span class="nc" id="L43">        }</span>
+
+        public String getCode() {
+<span class="nc" id="L46">            return code;</span>
+        }
+
+        public String getName() {
+<span class="nc" id="L50">            return name();</span>
+        }
+
+        /**
+         * 查找按键 {@code code} 对应的枚举值。
+         * &lt;p&gt;
+         * 如果找不到对应枚举值则返回 {@code null}。
+         *
+         * @param code 按键值
+         * @return 对应枚举值，不存在则返回 {@code null}
+         */
+        public static Button getByCode(String code) {
+<span class="nc bnc" id="L62" title="All 2 branches missed.">            for (Button value : values()) {</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">                if (value.getCode().equals(code)) {</span>
+<span class="nc" id="L64">                    return value;</span>
+                }
+            }
+<span class="nc" id="L67">            return null;</span>
+        }
+    }
+
+    /**
+     * 可选动作。
+     */
+<span class="nc" id="L74">    public enum Action {</span>
+        /** 退回上级菜单 */
+<span class="nc" id="L76">        ACTION_BACK(&quot;back&quot;),</span>
+        /** 转接服务 */
+<span class="nc" id="L78">        ACTION_CALL(&quot;call&quot;),</span>
+        /** 客户信息服务 */
+<span class="nc" id="L80">        ACTION_INFO(&quot;info&quot;),</span>
+        /** 结束通话 */
+<span class="nc" id="L82">        ACTION_HANGUP(&quot;hangup&quot;),</span>
+        /** 人工服务 */
+<span class="nc" id="L84">        ACTION_MANUAL(&quot;manual&quot;),</span>
+        /** 目录 */
+<span class="nc" id="L86">        ACTION_MENU(&quot;menu&quot;),</span>
+        /** 录音 */
+<span class="nc" id="L88">        ACTION_RECORD(&quot;record&quot;),</span>
+        /** 重听自助服务菜单 */
+<span class="nc" id="L90">        ACTION_REPLAY(&quot;replay&quot;);</span>
+
+        /** 动作对应字符串值。 */
+        private final String code;
+
+<span class="nc" id="L95">        Action(String code) {</span>
+<span class="nc" id="L96">            this.code = code;</span>
+<span class="nc" id="L97">        }</span>
+
+        public String getCode() {
+<span class="nc" id="L100">            return code;</span>
+        }
+
+        /**
+         * 查找按键 {@code code} 对应的枚举值，不区分大小写。
+         * &lt;p&gt;
+         * 如果找不到对应枚举值则返回 {@code null}。
+         *
+         * @param code 按键值
+         * @return 对应枚举值，不存在则返回 {@code null}
+         */
+        public static Action getByCode(String code) {
+<span class="nc bnc" id="L112" title="All 2 branches missed.">            for (Action value : values()) {</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">                if (value.getCode().equalsIgnoreCase(code)) {</span>
+<span class="nc" id="L114">                    return value;</span>
+                }
+            }
+<span class="nc" id="L117">            return null;</span>
+        }
+    }
+
+    /**
+     * 可选命令。
+     */
+<span class="nc" id="L124">    public enum Command {</span>
+        /** 脚本配置 */
+<span class="nc" id="L126">        COMMAND_CONFIG(&quot;config&quot;),</span>
+        /** 初始化一个 IVR 项目 */
+<span class="nc" id="L128">        COMMAND_INIT(&quot;init&quot;),</span>
+        /** 添加事件 */
+<span class="nc" id="L130">        COMMAND_ADD(&quot;add&quot;),</span>
+        /** 删除事件 */
+<span class="nc" id="L132">        COMMAND_REMOVE(&quot;remove&quot;),</span>
+        /** 展示关系图 */
+<span class="nc" id="L134">        COMMAND_STATUS(&quot;status&quot;),</span>
+        /** 导出 */
+<span class="nc" id="L136">        COMMAND_EXPORT(&quot;export&quot;),</span>
+        /** 测试 */
+<span class="nc" id="L138">        COMMAND_TEST(&quot;test&quot;),</span>
+        /** 帮助 */
+<span class="nc" id="L140">        COMMAND_HELP(&quot;help&quot;);</span>
+
+        /** 命令对应字符串值。 */
+        private final String code;
+
+<span class="nc" id="L145">        Command(String code) {</span>
+<span class="nc" id="L146">            this.code = code;</span>
+<span class="nc" id="L147">        }</span>
+
+        public String getCode() {
+<span class="nc" id="L150">            return code;</span>
+        }
+
+        /**
+         * 查找命令 {@code code} 对应的枚举值，不区分大小写。
+         * &lt;p&gt;
+         * 如果找不到对应枚举值则返回 {@code null}。
+         *
+         * @param code 命令
+         * @return 对应枚举值，不存在则返回 {@code null}
+         */
+        public static Command getByCode(String code) {
+<span class="nc bnc" id="L162" title="All 2 branches missed.">            for (Command value : values()) {</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">                if (value.getCode().equalsIgnoreCase(code)) {</span>
+<span class="nc" id="L164">                    return value;</span>
+                }
+            }
+<span class="nc" id="L167">            return null;</span>
+        }
+    }
+}
+</pre>
+<div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>
+</div>
+</body>
+</html>
